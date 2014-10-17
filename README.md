@@ -1,7 +1,7 @@
 AK47 
 =========
 
-AK47 is an easy [Network Service](http://en.wikipedia.org/wiki/Network_service) Testing Framework. It support any network protocol, such as [HTTP](http://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol), [Hession](http://hessian.caucho.com/), [ISO8583](http://en.wikipedia.org/wiki/ISO_8583), [Dubbo](https://github.com/alibaba/dubbo), [Thrift](http://en.wikipedia.org/wiki/Apache_Thrift), and other [RPC](http://en.wikipedia.org/wiki/Remote_procedure_call) protocols. 
+AK47 is an easy [Network Service](http://en.wikipedia.org/wiki/Network_service) Testing Framework. It support any network protocol, such as [HTTP](http://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol), [Hession](http://hessian.caucho.com/), [ISO8583](http://en.wikipedia.org/wiki/ISO_8583), [Dubbo](https://github.com/alibaba/dubbo), [Thrift](https://thrift.apache.org/), and other [RPC](http://en.wikipedia.org/wiki/Remote_procedure_call) protocols. 
 
 Its big advantage is the integration of Performance-Testing, Mock-Testing and Auto-Testing. By the 3-in-one designed, cases can be written always in the same style and be easily migrated in the three testing scenes.
 
