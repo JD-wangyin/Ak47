@@ -13,8 +13,9 @@ AK47 is an 3-in-one Network Interface Testing Framework, including Performance-T
 
 ## Use Cases
 
-- **mockting** 
-- 
+- mock-testing
+- performance-testing
+- auto-testing
 
 
 ## Build
