@@ -1,7 +1,9 @@
 AK47 
 =========
 
-AK47 is an easy Network Interface Testing Framework. It mainly includes Performance-Testing, Mock-Testing and Auto-Testing, and they can be written in the same style and be easily converted in each other.
+AK47 is an easy [Network Service](http://en.wikipedia.org/wiki/Network_service) Testing Framework. It support any network protocol, such as HTTP, Hession, ISO8583, Dubbo, and other RPC protocols. 
+
+Its big advantage is the integration of Performance-Testing, Mock-Testing and Auto-Testing. By the 3-in-one designed, cases can be written always in the same style and be easily migrated in the three testing scenes.
 
 
 AK47 is created and maintained by [JD-wangyin](https://github.com/JD-wangyin), with the help of [many contributors](https://github.com/JD-wangyin/ak47/graphs/contributors).
