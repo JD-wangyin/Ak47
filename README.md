@@ -30,18 +30,18 @@ You require the following to build AK47:
 Note that this is build-time requirement.  JDK 6 is enough to run your AK47-based application.
 
 
+
+## Contributing 
+
+AK47 is free software/open source, and is distributed under the [Apache License 2.0](http://www.apache.org/licenses/LICENSE-2.0).
+
+Please read [Using pull requests](https://help.github.com/articles/using-pull-requests/), and feel free to contribute code or documentation.
+
+
 ## Questions?
 
 You can [creating an issue](https://help.github.com/articles/creating-an-issue/), or 
 [searching issues](https://help.github.com/articles/searching-issues/).
 
 Or contact to [hannyu](https://github.com/hannyu).
-
-## Contributing 
-
-AK47 is free software/open source, and is distributed under the [Apache License 2.0](http://www.apache.org/licenses/LICENSE-2.0).
-
-Please read [Using pull requests](https://help.github.com/articles/using-pull-requests/), and feel free to contact to [hannyu](https://github.com/hannyu).
-
-
 
