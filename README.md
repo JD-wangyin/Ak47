@@ -40,7 +40,7 @@ Please read [Using pull requests](https://help.github.com/articles/using-pull-re
 
 ## Questions?
 
-You can [creating an issue](https://help.github.com/articles/creating-an-issue/), or 
+You can try [creating an issue](https://help.github.com/articles/creating-an-issue/), or 
 [searching issues](https://help.github.com/articles/searching-issues/).
 
 Or contact to [hannyu](https://github.com/hannyu).
