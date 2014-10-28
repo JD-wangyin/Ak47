@@ -1,22 +1,23 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
+  
 
-  <groupId>com.wangyin</groupId>
-  <artifactId>ak47-core</artifactId>
-  <version>1.0.0-SNAPSHOT</version>
+  <parent>
+    <groupId>com.wangyin</groupId>
+    <artifactId>ak47-parent</artifactId>
+    <version>0.1.0-SNAPSHOT</version>
+  </parent>
+  
+  <artifactId>ak47-pipe-http</artifactId>
+  <name>ak47-pipe-http</name>
   <packaging>jar</packaging>
-
-  <name>AK47</name>
-  <description>AK47 - The King of Gun</description>
-  <url>https://github.com/hannyu/ak47</url>
-
-  <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-  </properties>
-
+  
   <dependencies>
-
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>ak47-core</artifactId>
+      <version>${project.version}</version>
+    </dependency>
   </dependencies>
+  
 </project>
