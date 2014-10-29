@@ -1,14 +1,18 @@
 package com.wangyin.ak47.pipes.dubbo;
 
+import java.util.LinkedList;
+import java.util.List;
+import java.util.concurrent.Executor;
+import java.util.concurrent.atomic.AtomicLong;
+
 import com.wangyin.ak47.common.ByteUtil;
 import com.wangyin.ak47.common.Logger;
-import com.wangyin.ak47.common.YmlUtil;
 import com.wangyin.ak47.core.Pipe;
 import com.wangyin.ak47.core.Request;
 import com.wangyin.ak47.core.Response;
 import com.wangyin.ak47.core.Buffer;
+import com.wangyin.ak47.core.event.SingleThreadEventExecutor;
 import com.wangyin.ak47.core.exception.Ak47RuntimeException;
-import com.wangyin.ak47.pipes.dubbo.DubboHessian2Request;
 
 /**
  * 所有dubbo协议头的接口请继承此Pipe。
@@ -30,15 +34,20 @@ import com.wangyin.ak47.pipes.dubbo.DubboHessian2Request;
 public abstract class AbstractDubboPipe<Q, R> extends Pipe<Q, R> {
 	private static final Logger log = new Logger(AbstractDubboPipe.class);
 
-    public static final byte STATUS_OK = 20;
-    public static final short MAGIC_NUMBER = (short) 0xdabb;
-    public static final int HEADER_LENGTH = 16;
+	// dubbo header
+    protected static final byte STATUS_OK = 20;
+    protected static final short MAGIC_NUMBER = (short) 0xdabb;
+    protected static final int HEADER_LENGTH = 16;
     
 	// message flag.
-    public static final byte FLAG_REQUEST = (byte) 0x80;
-    public static final byte FLAG_TWOWAY = (byte) 0x40;
-    public static final byte FLAG_EVENT = (byte) 0x20;
-    public static final int SERIALIZATION_MASK = 0x1f;
+    protected static final byte FLAG_REQUEST = (byte) 0x80;
+    protected static final byte FLAG_TWOWAY = (byte) 0x40;
+    protected static final byte FLAG_EVENT = (byte) 0x20;
+    protected static final int SERIALIZATION_MASK = 0x1f;
+    
+    // attr key
+    protected static final String KEY_CURRENT_REQUEST_ID = "currentRequestId";
+    protected static AtomicLong globalGeneratedRequestId = new AtomicLong(0);
 	
     
     @Override
@@ -51,7 +60,7 @@ public abstract class AbstractDubboPipe<Q, R> extends Pipe<Q, R> {
         decodeDubboRequest(dd, request);
         
         // setAttr requestId
-        request.setRequestAttr("requestId", dd.getDubboHeader().getRequestId());
+        request.requestAttr().set(KEY_CURRENT_REQUEST_ID, dd.getDubboHeader().getRequestId());
     }
     
     /**
@@ -73,11 +82,7 @@ public abstract class AbstractDubboPipe<Q, R> extends Pipe<Q, R> {
         DubboHeader dh = dd.getDubboHeader();
         // set RequestId
         if( dh.getRequestId() == 0 ){
-            @SuppressWarnings("unchecked")
-            Request<DubboHessian2Request> lastreq = (Request<DubboHessian2Request>) request.getLast();
-            if( null != lastreq ){
-                dh.setRequestId( lastreq.getPojo().getDubboHeader().getRequestId() + 1 );
-            }
+            dh.setRequestId(globalGeneratedRequestId.getAndIncrement());
         }
 
         // set bodylength
@@ -104,8 +109,10 @@ public abstract class AbstractDubboPipe<Q, R> extends Pipe<Q, R> {
         if( !decodeDubboData(buf, dd) ){
             return;
         }
+        
         decodeDubboResponse(dd, response);
     }
+    
     
     /**
      * DubboData 包含了 dubbo header 以及 body
@@ -129,16 +136,9 @@ public abstract class AbstractDubboPipe<Q, R> extends Pipe<Q, R> {
             dh.setStatus(STATUS_OK);
         }
         
-        // set back RequestId
-//        @SuppressWarnings("unchecked")
-//        Request<DubboHessian2Request> nowreq = (Request<DubboHessian2Request>) response.getRequest();
-//        if( null != nowreq ){
-//            log.error("encodeResponse requestId: {}", nowreq.getPojo().getDubboHeader().getRequestId());
-//            dh.setRequestId( nowreq.getPojo().getDubboHeader().getRequestId() );
-//        }
-        Long requestId = (Long) response.getRequestAttr("requestId");
+        Long requestId = (Long) response.requestAttr().get(KEY_CURRENT_REQUEST_ID);
         if( requestId != null ){
-            log.error("encodeResponse requestId: {}", requestId);
+            log.warn("encodeResponse requestId: {}", requestId);
             dh.setRequestId(requestId);
         }
         
@@ -248,19 +248,20 @@ public abstract class AbstractDubboPipe<Q, R> extends Pipe<Q, R> {
         return true;
     }
     
-    
-    @Override
-    public Buffer[] split(Buffer buf){
-        //FIXME split
-        
+
+    /**
+     * 读取一个dubbo数据包
+     * 
+     * @param buf
+     * @return
+     */
+    private Buffer readOne(Buffer buf){
         int readerIndex = buf.readerIndex();
         int readableBytes = buf.readableBytes();
         
-        log.error("preDecodeRequest: readable {}.", readableBytes);
-        
         // header length
         if( readableBytes < HEADER_LENGTH ){
-            log.debug("Need more read for header.");
+//            log.debug("Need more read for header.");
             return null;
         }
         
@@ -271,24 +272,34 @@ public abstract class AbstractDubboPipe<Q, R> extends Pipe<Q, R> {
         int bodyLength = ByteUtil.bytes2int(headerBytes, 12);
         int reqLength = HEADER_LENGTH + bodyLength;
         
-        //FIXME
-        log.error("requestId: {}, reqLength: {}", ByteUtil.bytes2long(headerBytes, 4), reqLength);
-        
         
         if( readableBytes < reqLength ){
-            log.debug("Need more read for body.");
+//            log.debug("Need more read for body.");
             return null;
         }else{
             Buffer copybuf = buf.copy(readerIndex, reqLength);
             buf.readerIndex(readerIndex + reqLength);
             return copybuf;
         }
-        
     }
     
     @Override
-    public void doService(Request<Q> request, Response<R> response) throws Exception {
+    public List<Buffer> split(Buffer buf){
         
+        List<Buffer> bufs = new LinkedList<Buffer>();
+        Buffer one = readOne(buf);
+        while( null != one ){
+            bufs.add(one);
+            one = readOne(buf);
+        }
+        
+        return bufs;
     }
+    
+    @Override
+    public Executor newExecutor(){
+        return new SingleThreadEventExecutor(1, 200);
+    }
+    
 
 }

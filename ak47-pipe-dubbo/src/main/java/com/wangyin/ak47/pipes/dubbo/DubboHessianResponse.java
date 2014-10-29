@@ -8,11 +8,11 @@ import com.wangyin.ak47.pipes.dubbo.DubboHeader;
  * @author wyhubingyin
  * @date 2014年3月18日
  */
-public class DubboHessian2Response {
+public class DubboHessianResponse {
 	private DubboHeader dubboHeader;
 	private Object result;
 
-	public DubboHessian2Response() {
+	public DubboHessianResponse() {
 	    dubboHeader = new DubboHeader();
 	}
 	

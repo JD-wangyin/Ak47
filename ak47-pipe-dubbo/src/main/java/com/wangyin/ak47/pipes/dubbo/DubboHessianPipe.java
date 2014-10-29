@@ -30,9 +30,9 @@ import com.wangyin.ak47.pipes.dubbo.DubboHeader;
  * @author wyhubingyin
  * 
  */
-public final class DubboHessian2Pipe extends AbstractDubboPipe<DubboHessian2Request, DubboHessian2Response> {
+public final class DubboHessianPipe extends AbstractDubboPipe<DubboHessianRequest, DubboHessianResponse> {
     
-	private static final Logger log = new Logger(DubboHessian2Pipe.class);
+	private static final Logger log = new Logger(DubboHessianPipe.class);
 	
     public static final byte HESSIAN_SERIALIZATION_ID = 0x02;
     
@@ -46,9 +46,9 @@ public final class DubboHessian2Pipe extends AbstractDubboPipe<DubboHessian2Requ
     private HessianFactory hessianFactory = new HessianFactory();
     
 	@Override
-	public void decodeDubboRequest(DubboData dd, Request<DubboHessian2Request> request) throws Exception {
+	public void decodeDubboRequest(DubboData dd, Request<DubboHessianRequest> request) throws Exception {
 	    
-	    DubboHessian2Request dubboreq = new DubboHessian2Request();
+	    DubboHessianRequest dubboreq = new DubboHessianRequest();
 	    DubboHeader dh = dd.getDubboHeader();
 	    byte flag = dh.getFlag();
 	    if( (flag & FLAG_EVENT) != 0 ){
@@ -101,9 +101,9 @@ public final class DubboHessian2Pipe extends AbstractDubboPipe<DubboHessian2Requ
 	}
 
 	@Override
-	public void encodeDubboRequest(Request<DubboHessian2Request> request, DubboData dd) throws Exception {
+	public void encodeDubboRequest(Request<DubboHessianRequest> request, DubboData dd) throws Exception {
 	    
-	    DubboHessian2Request dubboreq = request.pojo();
+	    DubboHessianRequest dubboreq = request.pojo();
 	    // set flag
         DubboHeader dh = dubboreq.getDubboHeader();
         dh.setFlag((byte) (FLAG_REQUEST | FLAG_TWOWAY | HESSIAN_SERIALIZATION_ID) );
@@ -149,9 +149,9 @@ public final class DubboHessian2Pipe extends AbstractDubboPipe<DubboHessian2Requ
 	}
 
 	@Override
-	public void decodeDubboResponse(DubboData dd, Response<DubboHessian2Response> response) throws Exception {
+	public void decodeDubboResponse(DubboData dd, Response<DubboHessianResponse> response) throws Exception {
 	    
-        DubboHessian2Response dubbores = new DubboHessian2Response();
+        DubboHessianResponse dubbores = new DubboHessianResponse();
         DubboHeader dh = dd.getDubboHeader();
         dubbores.setDubboHeader(dh);
         
@@ -186,17 +186,15 @@ public final class DubboHessian2Pipe extends AbstractDubboPipe<DubboHessian2Requ
 	}
 
 	@Override
-	public void encodeDubboResponse(Response<DubboHessian2Response> response, DubboData dd) throws Exception {
+	public void encodeDubboResponse(Response<DubboHessianResponse> response, DubboData dd) throws Exception {
 	    
-	    DubboHessian2Response dubbores = response.pojo();
+	    DubboHessianResponse dubbores = response.pojo();
 	    
 	    // set flag
         DubboHeader dh = dubbores.getDubboHeader();
         dd.setDubboHeader(dubbores.getDubboHeader());
         
         // set body
-        Object result = dubbores.getResult();
-        
         dh.setFlag((byte) (dh.getFlag() | HESSIAN_SERIALIZATION_ID) );
         
         ByteArrayOutputStream bos = new ByteArrayOutputStream();

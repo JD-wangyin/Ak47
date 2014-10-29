@@ -11,7 +11,7 @@ import com.wangyin.ak47.pipes.dubbo.DubboHeader;
  * @author wyhubingyin
  * @date 2014年3月18日
  */
-public class DubboHessian2Request {
+public class DubboHessianRequest {
 
 	private DubboHeader dubboHeader;
 	private String dubboVersion;
@@ -21,7 +21,7 @@ public class DubboHessian2Request {
     private List<Object> args;
 	private Map<String, String> attachments; 
 
-	public DubboHessian2Request() {
+	public DubboHessianRequest() {
 	    dubboHeader = new DubboHeader();
 	    args = new LinkedList<Object>();
 	    attachments = new LinkedHashMap<String, String>();
