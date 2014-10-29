@@ -1,0 +1,19 @@
+package com.wangyin.qa.ak47.config;
+
+import java.io.IOException;
+import java.util.Map;
+
+import org.junit.Assert;
+import org.junit.Test;
+
+import com.wangyin.ak47.common.ConfigLoader;
+
+public class ConfigLoaderTest {
+    
+    @Test
+    public void testme() throws IOException{
+        Map<String, Object> m1 = ConfigLoader.load("ak47");
+        Assert.assertTrue( m1.containsKey("projectName") );
+    }
+
+}

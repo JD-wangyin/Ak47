@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<configuration>
+  
+  <!-- //格式是 ${变量名:-默认值}，光有冒号还不够，再加条短线后面才是默认值 -->
+  <property name="LOG_HOME" value="${ak47.home:-.}/log/"/>
+    
+  <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+    <encoder>
+      <pattern>%d{yy-MM-dd HH:mm:ss} [%-16t] %-5p %-22c{0} - %m%n</pattern>
+    </encoder>
+  </appender>
+  
+  <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender" 
+      additivity="false">
+    <File>${LOG_HOME}/ak47.log</File>
+    <encoder>
+      <pattern>%d{yy-MM-dd.HH:mm:ss} [%-16t] %-5p %-22c{0} - %m%n</pattern>
+    </encoder>
+    <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+      <fileNamePattern>${LOG_HOME}/ak47.log.%d{yyyyMMdd}</fileNamePattern>
+    </rollingPolicy>
+  </appender>
+  
+  <logger name="com.wangyin.ak47" level="debug"/>
+
+  <root level="debug">
+    <appender-ref ref="CONSOLE"/>
+    <appender-ref ref="FILE"/>
+  </root>
+  
+</configuration>
