@@ -87,6 +87,8 @@ public class HandlerChain<O, I> {
 	 * @return
 	 */
 	public HandlerChain<O, I> remove(Handler<O, I> handler){
+	    log.debug("HandlerChain remove one.");
+	    
 	    SimpleHandlerContext<O, I> tmp = head.next;
 	    SimpleHandlerContext<O, I> ctx = null;
 	    while( tmp != tail ){
@@ -147,11 +149,15 @@ public class HandlerChain<O, I> {
         @Override
         public void doSend(HandlerContext<O, I> ctx, Message<O> msg,
                 Promise<O, I> promise) {
+            log.debug("HeadContext doSend().");
+            
             this.channel().unsafe().send(msg, promise);
         }
 
         @Override
         public void doDisconnect(HandlerContext<O, I> ctx, Promise<O, I> promise) {
+            log.debug("HeadContext doDisconnect().");
+            
             this.channel().unsafe().disconnect(promise);
         }
         
@@ -225,17 +231,20 @@ public class HandlerChain<O, I> {
         @Override
         public void doConnected(HandlerContext<O, I> ctx) throws Exception {
             // do nothing.
+            log.debug("TailContext doConnected().");
         }
         
         @Override
         public void doReceived(HandlerContext<O, I> ctx, Message<I> msg)
                 throws Exception {
             // do nothing.
+            log.debug("TailContext doReceived().");
         }
 
         @Override
         public void doDisconnected(HandlerContext<O, I> ctx) throws Exception {
             // do nothing.
+            log.debug("TailContext doDisconnected().");
         }
 
         @Override

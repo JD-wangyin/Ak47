@@ -114,6 +114,27 @@ public class RecordPool<Q, R> {
         return null;
     }
     
+    
+    /**
+     * 写入一条数据
+     * 
+     * @param record
+     * @throws IOException 
+     */
+    private void writeOneRecord(BufferedWriter bw, Record<Q, R> record, int index) throws IOException{
+        
+        bw.write( String.format(RECORD_BEGIN_LINE, index) );
+        bw.newLine();
+        String recStr = yaml.dump(record);
+        bw.write( recStr );
+        bw.newLine();
+        bw.write( RECORD_END_LINE );
+        bw.newLine();
+        bw.newLine();
+        bw.newLine();
+    } 
+    
+    
     /**
      * 将缓存中的所有Record，全部持久化到yaml文件中
      * 
@@ -181,28 +202,7 @@ public class RecordPool<Q, R> {
         
         total = records.size();
         dumped = total;
-        
     }
-    
-    /**
-     * 写入一条数据
-     * 
-     * @param record
-     * @throws IOException 
-     */
-    private void writeOneRecord(BufferedWriter bw, Record<Q, R> record, int index) throws IOException{
-        
-        bw.write( String.format(RECORD_BEGIN_LINE, index) );
-        bw.newLine();
-        String recStr = yaml.dump(record);
-        bw.write( recStr );
-        bw.newLine();
-        bw.write( RECORD_END_LINE );
-        bw.newLine();
-        bw.newLine();
-        bw.newLine();
-        
-    } 
     
     
 }

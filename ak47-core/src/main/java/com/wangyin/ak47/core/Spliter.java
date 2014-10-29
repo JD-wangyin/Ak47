@@ -1,5 +1,7 @@
 package com.wangyin.ak47.core;
 
+import java.util.List;
+
 import com.wangyin.ak47.core.Buffer;
 
 /**
@@ -12,6 +14,6 @@ import com.wangyin.ak47.core.Buffer;
  */
 public interface Spliter {
 
-    public Buffer[] split(Buffer buf);
+    public List<Buffer> split(Buffer buf);
     
 }

@@ -22,8 +22,9 @@ public class BlockingQueueDriverHandler<O, I> extends HandlerAdapter<O, I> {
     
     @Override
     public void doReceived(HandlerContext<O, I> ctx, Message<I> msg){
-        blockingQueue.add(msg.getPojo());
+        log.debug("doReceived(): Got it.");
         
+        blockingQueue.add(msg.getPojo());
         ctx.fireReceived(msg);
     }
     
@@ -32,8 +33,9 @@ public class BlockingQueueDriverHandler<O, I> extends HandlerAdapter<O, I> {
         this.ctx = ctx;
         synchronized(this){
             if( null == candidate ){
-                log.debug("There is NO candidate to send.");
+                log.debug("doConnected(): NO candidate to send.");
             }else{
+                log.debug("doConnected(): Send a candidate.");
                 ctx.send(candidate);
             }
         }
@@ -50,9 +52,9 @@ public class BlockingQueueDriverHandler<O, I> extends HandlerAdapter<O, I> {
             synchronized(this){
                 if( null == candidate ){
                     candidate = pojo;
-                    log.debug("Send before connected, hold.");
+                    log.debug("send(): Before connected, hold.");
                 }else{
-                    log.error("send fail. connection is not established.");
+                    log.error("send(): Connection is not established.");
                 }
             }
         }else{
@@ -61,7 +63,7 @@ public class BlockingQueueDriverHandler<O, I> extends HandlerAdapter<O, I> {
     }
     
     public I recv() throws InterruptedException{
-        log.debug("Wait for receiving one.");
+        log.debug("recv(): Wait for receiving one.");
         return blockingQueue.take();
     }
 

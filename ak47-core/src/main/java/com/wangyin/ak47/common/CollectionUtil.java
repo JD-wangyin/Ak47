@@ -134,5 +134,40 @@ public class CollectionUtil {
 	    return list.toArray();
 	}
 	
+    /**
+     * 将list转成string, 
+     * 
+     * @param list
+     * @param separator     分隔符
+     * @return
+     */
+    public static String join(List<String> list, String separator){
+
+        if( list == null || list.size() == 0 ){
+            return "";
+        }
+        StringBuilder sb = new StringBuilder();
+        sb.append(list.get(0));
+        int size = list.size();
+        for(int i=1;i<size;i++){
+            sb.append(separator).append(list.get(i));
+        }
+        return sb.toString();
+    }
 	
+    
+    /**
+     * 得到数组成员的class类型数组
+     * 
+     * @param list
+     * @return
+     */
+    @SafeVarargs
+    public static <T> Class<?>[] arrayOfClassType(T... array) {
+        Class<?>[] clazzs = new Class<?>[array.length];
+        for(int i=0; i<array.length; i++){
+            clazzs[i] = array[i].getClass();
+        }
+        return clazzs;
+    }
 }

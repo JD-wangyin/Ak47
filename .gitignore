@@ -11,5 +11,21 @@
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 
-# logs
+# Ak47 logs
 *.log
+
+# Eclipse project files
+.project
+.classpath
+.settings
+bin/
+
+# IntelliJ IDEA project files and directories
+*.iml
+*.ipr
+*.iws
+.idea/
+
+# Build targets
+/target
+*/target

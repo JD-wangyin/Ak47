@@ -8,7 +8,7 @@ import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelOption;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
-import io.netty.channel.socket.nio.NioServerSocketChannel;
+import io.netty.channel.socket.nio.NioSocketChannel;
 
 import java.net.InetSocketAddress;
 
@@ -87,13 +87,12 @@ public class NettySimpleDriver<Q, R> implements SimpleDriver<Q, R>{
         bootstrap = new Bootstrap();
         bootstrap
                 .group(workerGroup)
-                .channel(NioServerSocketChannel.class)
+                .channel(NioSocketChannel.class)
                 .option(ChannelOption.SO_REUSEADDR, true)
                 .option(ChannelOption.TCP_NODELAY, true)
                 .option(ChannelOption.SO_RCVBUF, Ak47Constants.SO_RCVBUF)
                 .option(ChannelOption.SO_SNDBUF, Ak47Constants.SO_SNDBUF)
-                .option(ChannelOption.ALLOCATOR, PooledByteBufAllocator.DEFAULT)
-                .option(ChannelOption.SO_BACKLOG, Ak47Constants.SO_BACKLOG);
+                .option(ChannelOption.ALLOCATOR, PooledByteBufAllocator.DEFAULT);
                 
         bootstrap.handler(new ChannelInitializer<SocketChannel>() {
             @Override
@@ -101,9 +100,10 @@ public class NettySimpleDriver<Q, R> implements SimpleDriver<Q, R>{
                     throws Exception {
                 
                 NettyChannel<Q, R> channel = new NettyChannel<Q, R>(ch);
-                channel.chain()
-                        .addLast("StubInitializer", stubInitializer)
-                        .addLast("UserInitializer", userInitializer);
+                channel.chain().addLast("StubInitializer", stubInitializer);
+                if( userInitializer != null ){
+                    channel.chain().addLast("UserInitializer", userInitializer);
+                }
 
                 NettyChannelHandlerAdapter<Q, R> nettyChannelHandler = 
                         new NettyChannelHandlerAdapter<Q, R>(channel, pipe, pipe.newExecutor());

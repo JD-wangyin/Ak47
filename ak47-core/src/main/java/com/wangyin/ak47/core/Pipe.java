@@ -1,10 +1,13 @@
 package com.wangyin.ak47.core;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.Executor;
 
 import com.wangyin.ak47.core.driver.SimpleDriver;
 import com.wangyin.ak47.core.driver.StressDriver;
 import com.wangyin.ak47.core.event.CurrentThreadEventExecutor;
+import com.wangyin.ak47.core.event.ExecutorFactory;
 import com.wangyin.ak47.core.netty.NettySimpleDriver;
 import com.wangyin.ak47.core.netty.NettySimpleStub;
 import com.wangyin.ak47.core.netty.NettyStressDriver;
@@ -65,7 +68,7 @@ import com.wangyin.ak47.core.Buffer;
  * @param <Q>       Request-POJO
  * @param <R>       Response-POJO
  */
-public abstract class Pipe<Q, R> implements Codec<Q, R>, Spliter{
+public abstract class Pipe<Q, R> implements Codec<Q, R>, Spliter, ExecutorFactory {
     
     /**
      * Create a SimpleStub, for general use, such as Functional-Testing.
@@ -138,13 +141,20 @@ public abstract class Pipe<Q, R> implements Codec<Q, R>, Spliter{
      * @param buf
      * @return
      */
-    public Buffer[] split(Buffer buf){
-        Buffer[] bufs = new Buffer[1];
-        bufs[0] = buf;
+    public List<Buffer> split(Buffer buf){
+//      return new Buffer[0];
+        
+//        Buffer[] bufs = new Buffer[1];
+//        bufs[0] = buf;
+//        return bufs;
+        
+        List<Buffer> bufs = new ArrayList<Buffer>(1);
+        bufs.add(buf);
         return bufs;
-//        return new Buffer[0];
     }
     
+    
+    @Override
     public Executor newExecutor(){
         return new CurrentThreadEventExecutor();
     }

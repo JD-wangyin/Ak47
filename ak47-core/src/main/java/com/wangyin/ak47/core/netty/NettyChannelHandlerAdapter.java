@@ -1,6 +1,7 @@
 package com.wangyin.ak47.core.netty;
 
 import java.net.SocketAddress;
+import java.util.List;
 import java.util.concurrent.Executor;
 
 import com.wangyin.ak47.common.Logger;
@@ -28,7 +29,7 @@ import io.netty.channel.ChannelPromise;
  * @param <I>   Inbound
  */
 public class NettyChannelHandlerAdapter<O, I> implements ChannelInboundHandler, ChannelOutboundHandler {
-    private static final Logger log = new Logger(Netty4ChannelHandlerAdapter.class);
+    private static final Logger log = new Logger(NettyChannelHandlerAdapter.class);
     
     private NettyChannel<O, I> channel;
 //    private ChannelHandlerContext realCtx;
@@ -58,35 +59,47 @@ public class NettyChannelHandlerAdapter<O, I> implements ChannelInboundHandler, 
     @Override
     public void exceptionCaught(ChannelHandlerContext nettyctx, Throwable cause)
             throws Exception {
+        log.debug("exceptionCaught().");
+        
         channel.fireCaught(cause);
     }
     
 
     @Override
     public void channelRegistered(ChannelHandlerContext nettyctx) throws Exception {
+        log.debug("channelRegistered().");
+        
         nettyctx.fireChannelRegistered();
     }
     
     @Override
     public void deregister(ChannelHandlerContext nettyctx, ChannelPromise promise)
             throws Exception {
+        log.debug("deregister().");
+        
         nettyctx.deregister(promise);
     }
     
     @Override
     public void channelUnregistered(ChannelHandlerContext nettyctx) throws Exception {
+        log.debug("channelUnregistered().");
+        
         nettyctx.fireChannelUnregistered();
     }
 
     
     @Override
     public void channelActive(ChannelHandlerContext nettyctx) throws Exception {
+        log.debug("channelActive().");
+        
         ConnectedEventTask<O, I> task = new ConnectedEventTask<O, I>(channel);
         executor.execute(task);
     }
 
     @Override
     public void channelInactive(ChannelHandlerContext nettyctx) throws Exception {
+        log.debug("channelInactive().");
+        
         DisconnectedEventTask<O, I> task = new DisconnectedEventTask<O, I>(channel);
         executor.execute(task);
     }
@@ -96,6 +109,7 @@ public class NettyChannelHandlerAdapter<O, I> implements ChannelInboundHandler, 
     @Override
     public void channelRead(ChannelHandlerContext nettyctx, Object msg)
             throws Exception {
+        log.debug("channelRead().");
         
         if( !(msg instanceof ByteBuf) ){
             log.error("Why channelRead get a NO ByteBuf?");
@@ -111,10 +125,12 @@ public class NettyChannelHandlerAdapter<O, I> implements ChannelInboundHandler, 
             bb.release();
         }
         
-        Buffer[] bufs = spliter.split(tempbuf);
+        List<Buffer> bufs = spliter.split(tempbuf);
+        int bufsize = bufs.size();
+        log.debug("split into {}.", bufsize);
         
-        for(int i=0; i<bufs.length; i++){
-            SimpleMessage<I> newmsg = new SimpleMessage<I>(bufs[i]);
+        for(int i=0; i<bufsize; i++){
+            SimpleMessage<I> newmsg = new SimpleMessage<I>(bufs.get(i));
             ReceivedEventTask<O, I> task = new ReceivedEventTask<O, I>(channel, newmsg);
             executor.execute(task);
         }
@@ -128,12 +144,16 @@ public class NettyChannelHandlerAdapter<O, I> implements ChannelInboundHandler, 
 
     @Override
     public void channelReadComplete(ChannelHandlerContext nettyctx) throws Exception {
+        log.debug("channelReadComplete().");
+        
         nettyctx.fireChannelReadComplete();
     }
 
     @Override
     public void userEventTriggered(ChannelHandlerContext nettyctx, Object evt)
             throws Exception {
+        log.debug("userEventTriggered().");
+        
         nettyctx.fireUserEventTriggered(evt);
     }
 

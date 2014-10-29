@@ -1,10 +1,10 @@
 package com.wangyin.ak47.core.netty;
 
 import java.net.SocketAddress;
+import java.util.List;
 import java.util.concurrent.Executor;
 
 import com.wangyin.ak47.common.Logger;
-import com.wangyin.ak47.core.Message;
 import com.wangyin.ak47.core.Spliter;
 import com.wangyin.ak47.core.Buffer;
 import com.wangyin.ak47.core.netty.NettyBuffer;
@@ -112,13 +112,16 @@ public class Netty4ChannelHandlerAdapter<O, I> implements ChannelInboundHandler,
             bb.release();
         }
         
-        Buffer[] bufs = spliter.split(tempbuf);
+        List<Buffer> bufs = spliter.split(tempbuf);
+        int bufsize = bufs.size();
+        log.debug("split into {}.", bufsize);
         
-        for(int i=0; i<bufs.length; i++){
-            Message<I> newmsg = new SimpleMessage<I>(bufs[i]);
+        for(int i=0; i<bufsize; i++){
+            SimpleMessage<I> newmsg = new SimpleMessage<I>(bufs.get(i));
             ReceivedEventTask<O, I> task = new ReceivedEventTask<O, I>(channel, newmsg);
             executor.execute(task);
         }
+        
         
         if( !tempbuf.isReadable() ){
             tempbuf.release();

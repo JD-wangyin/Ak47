@@ -13,6 +13,7 @@ public class NettyPromise<O, I> extends NettyFuture<O, I> implements Promise<O, 
     
     public NettyPromise(Channel<O, I> channel, ChannelPromise realPromise) {
         super(channel, realPromise);
+        this.realPromise = realPromise;
     }
     
     public ChannelPromise channelPromise(){

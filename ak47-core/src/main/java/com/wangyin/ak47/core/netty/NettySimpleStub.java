@@ -108,9 +108,10 @@ public class NettySimpleStub<Q, R> implements SimpleStub<Q, R> {
             protected void initChannel(SocketChannel ch) throws Exception {
                 
                 NettyChannel<R, Q> channel = new NettyChannel<R, Q>(ch);
-                channel.chain()
-                        .addLast("StubInitializer", stubInitializer)
-                        .addLast("UserInitializer", userInitializer);
+                channel.chain().addLast("StubInitializer", stubInitializer);
+                if( userInitializer != null ){
+                    channel.chain().addLast("UserInitializer", userInitializer);
+                }
 
                 NettyChannelHandlerAdapter<R, Q> nettyChannelHandler = 
                         new NettyChannelHandlerAdapter<R, Q>(channel, pipe, pipe.newExecutor());
