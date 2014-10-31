@@ -15,6 +15,38 @@ Ak47 is created and maintained by [JD-wangyin](https://github.com/JD-wangyin), w
 - **3-in-one**: 
 
 ## Examples
+This is a SimpleHttpDriver example:
+```java
+    @Test
+    public void testme() throws Exception{
+        // new a Pipe
+        SimpleHttpPipe pipe = new SimpleHttpPipe();
+        
+        // create a stub
+        SimpleStub<SimpleHttpRequest, SimpleHttpResponse> stub = 
+                pipe.createSimpleStub(8080);
+        
+        // add a service
+        stub.addService("hello", new Service<SimpleHttpRequest, SimpleHttpResponse>(){
+
+            @Override
+            public void doService(Request<SimpleHttpRequest> request,
+                    Response<SimpleHttpResponse> response) throws Exception {
+                // check request, and build response
+                
+                SimpleHttpResponse httpres = new SimpleHttpResponse();
+                httpres.setContent("Hello AK47!".getBytes());
+                response.setPojo(httpres);
+            }
+            
+        });
+        
+        // finally start and hold it.
+        stub.start();
+        stub.hold();
+    }
+```
+
 
 - mock-testing
 - performance-testing
