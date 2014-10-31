@@ -15,7 +15,26 @@ Ak47 is created and maintained by [JD-wangyin](https://github.com/JD-wangyin), w
 - **3-in-one**: 
 
 ## Examples
-How to write a simple Http Stub? 
+A Simple Http Driver
+```java
+// new a Pipe
+SimpleHttpPipe pipe = new SimpleHttpPipe();
+
+// create a simple driver
+SimpleDriver<SimpleHttpRequest, SimpleHttpResponse> driver = 
+        pipe.createSimpleDriver("www.jd.com", 80);
+
+// prepare a request
+SimpleHttpRequest httpreq = new SimpleHttpRequest("GET", "/");
+
+// send it, and get a response
+SimpleHttpResponse httpres = driver.send(httpreq);
+
+// finally check the res.
+System.out.println(httpres.getStatusCode());
+System.out.println(httpres.getContent().length);
+```
+A Simple Http Stub
 ```java
 // new a Pipe
 SimpleHttpPipe pipe = new SimpleHttpPipe();
