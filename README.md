@@ -3,9 +3,10 @@ Ak47
 
 Ak47 is an easy [Network Service](http://en.wikipedia.org/wiki/Network_service) Testing Framework. It can support mostly network protocols, such as [HTTP](http://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol), [Hession](http://hessian.caucho.com/), [ISO8583](http://en.wikipedia.org/wiki/ISO_8583), [Dubbo](https://github.com/alibaba/dubbo), [Thrift](https://thrift.apache.org/), and other [RPC](http://en.wikipedia.org/wiki/Remote_procedure_call) protocols. 
 
-Its most novel feature is the integration of [Performance-Testing](http://en.wikipedia.org/wiki/Performance_testing), [Mock-Testing](http://en.wikipedia.org/wiki/Mock_object) and [Automation-Testing](http://en.wikipedia.org/wiki/Test_automation). By the 3-in-one design, cases can be written always in the same style and be easily migrated in the three scenes.
+Ak47 is base on [Netty](http://netty.io)/[NIO](http://en.wikipedia.org/wiki/Non-blocking_I/O_(Java)), whitch meas it has the potential for high concurrent performance. 
 
-Ak47 is created and maintained by [JD-wangyin](https://github.com/JD-wangyin), with the help of [many contributors](https://github.com/JD-wangyin/ak47/graphs/contributors).
+Ak47's most novel feature may be the integration of [Performance-Testing](http://en.wikipedia.org/wiki/Performance_testing), [Mock-Testing](http://en.wikipedia.org/wiki/Mock_object) and [Automation-Testing](http://en.wikipedia.org/wiki/Test_automation). By the 3-in-one design, cases can be written always in the same style and be easily migrated in the three scenes.
+
 
 ## Features
 
@@ -82,7 +83,7 @@ Note that this is build-time requirement.  JDK 6 is enough to run your AK47-base
 
 Ak47 is free software/open source, and is distributed under the [Apache License 2.0](http://www.apache.org/licenses/LICENSE-2.0).
 
-Please read [Using pull requests](https://help.github.com/articles/using-pull-requests/), and feel free to contribute code or documentation.
+Please feel free to contribute code or documentation. [Pull Requests](https://help.github.com/articles/using-pull-requests/) are welcome!
 
 
 ## Questions?
