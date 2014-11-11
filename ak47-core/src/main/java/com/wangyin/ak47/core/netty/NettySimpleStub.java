@@ -19,8 +19,8 @@ import com.wangyin.ak47.core.HandlerChain;
 import com.wangyin.ak47.core.Pipe;
 import com.wangyin.ak47.core.Service;
 import com.wangyin.ak47.core.handler.CodecStubHandler;
-import com.wangyin.ak47.core.handler.LoggingOutbandHandler;
-import com.wangyin.ak47.core.handler.LoggingInboundHandler;
+import com.wangyin.ak47.core.handler.FilterStubHandler;
+import com.wangyin.ak47.core.handler.LoggingTrafficHandler;
 import com.wangyin.ak47.core.handler.HandlerInitializer;
 import com.wangyin.ak47.core.handler.ServiceStubHandler;
 
@@ -71,17 +71,17 @@ public class NettySimpleStub<Q, R> implements SimpleStub<Q, R> {
     
     protected void initStubHandler(){
         
-        final LoggingOutbandHandler<R, Q> logOutboundHandler = new LoggingOutbandHandler<R, Q>();
-        final LoggingInboundHandler<R, Q> logInboundHandler = new LoggingInboundHandler<R, Q>();
+        final LoggingTrafficHandler<R, Q> logTrafficHandler = new LoggingTrafficHandler<R, Q>();
         final CodecStubHandler<R, Q> codecStubHandler = new CodecStubHandler<R, Q>(pipe);
-        serviceStubHandler = new ServiceStubHandler<R, Q>(pipe);
+        final FilterStubHandler<R, Q> filterStubHandler = new FilterStubHandler<R, Q>(pipe);
+        serviceStubHandler = new ServiceStubHandler<R, Q>();
 
         stubInitializer = new HandlerInitializer<R, Q>() {
             @Override
             public void initHandler(HandlerChain<R, Q> chain) {
-                chain.addLast("LoggingOutboundHandler", logOutboundHandler);
+                chain.addLast("LoggingTrafficHandler", logTrafficHandler);
                 chain.addLast("CodecStubHandler", codecStubHandler);
-                chain.addLast("LoggingInboundHandler", logInboundHandler);
+                chain.addLast("FilterStubHandler", filterStubHandler);
                 chain.addLast("ServiceStubHandler", serviceStubHandler);
             }
         };

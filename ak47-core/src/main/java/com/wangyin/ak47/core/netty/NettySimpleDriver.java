@@ -20,9 +20,12 @@ import com.wangyin.ak47.core.Service;
 import com.wangyin.ak47.core.driver.SimpleDriver;
 import com.wangyin.ak47.core.handler.BlockingQueueDriverHandler;
 import com.wangyin.ak47.core.handler.CodecDriverHandler;
-import com.wangyin.ak47.core.handler.LoggingOutbandHandler;
+import com.wangyin.ak47.core.handler.FilterDriverHandler;
+import com.wangyin.ak47.core.handler.LoggingTrafficHandler;
 import com.wangyin.ak47.core.handler.HandlerInitializer;
 import com.wangyin.ak47.core.handler.ServiceDriverHandler;
+
+
 
 public class NettySimpleDriver<Q, R> implements SimpleDriver<Q, R>{
     private static final Logger log = new Logger(NettySimpleDriver.class);
@@ -65,16 +68,18 @@ public class NettySimpleDriver<Q, R> implements SimpleDriver<Q, R>{
     
     protected void initDriverHandler(){
 
-        final LoggingOutbandHandler<Q, R> logOutboundHandler = new LoggingOutbandHandler<Q, R>();
+        final LoggingTrafficHandler<Q, R> logTrafficHandler = new LoggingTrafficHandler<Q, R>();
         final CodecDriverHandler<Q, R> codecDriverHandler = new CodecDriverHandler<Q, R>(pipe);
-        serviceDriverHandler = new ServiceDriverHandler<Q, R>(pipe);
+        final FilterDriverHandler<Q, R> filterDriverHandler = new FilterDriverHandler<Q, R>(pipe);
+        serviceDriverHandler = new ServiceDriverHandler<Q, R>();
         blockingQueueDriverHandler = new BlockingQueueDriverHandler<Q, R>();
         
         stubInitializer = new HandlerInitializer<Q, R>(){
             @Override
             public void initHandler(HandlerChain<Q, R> chain) {
-                chain.addLast("LoggingOutboundHandler", logOutboundHandler);
+                chain.addLast("LoggingTrafficHandler", logTrafficHandler);
                 chain.addLast("CodecDriverHandler", codecDriverHandler);
+                chain.addLast("FilterDriverHandler", filterDriverHandler);
                 chain.addLast("ServiceDriverHandler", serviceDriverHandler);
                 chain.addLast("BlockingQueueDriverHandler", blockingQueueDriverHandler);
             }
