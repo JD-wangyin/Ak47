@@ -16,7 +16,6 @@ public class SimpleHttpDriverExample {
         // create a simple driver
         SimpleDriver<SimpleHttpRequest, SimpleHttpResponse> driver = 
                 pipe.createSimpleDriver("www.jd.com", 80);
-//                pipe.createSimpleDriver("localhost", 8055);
         
         // prepare a request
         SimpleHttpRequest httpreq = new SimpleHttpRequest("GET", "/");
@@ -25,9 +24,8 @@ public class SimpleHttpDriverExample {
         SimpleHttpResponse httpres = driver.send(httpreq);
         
         // finally check the res.
-        System.out.println(httpres.getStartLine());
-        System.out.println(httpres.getContent().length);
         System.out.println(httpres.getStatusCode());
+        System.out.println(httpres.getContent().length);
         
     }
 
