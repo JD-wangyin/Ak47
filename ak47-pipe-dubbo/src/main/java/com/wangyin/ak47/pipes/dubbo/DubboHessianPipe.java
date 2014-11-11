@@ -16,6 +16,8 @@ import com.caucho.hessian.io.HessianFactory;
 import com.wangyin.ak47.common.CollectionUtil;
 import com.wangyin.ak47.common.Logger;
 import com.wangyin.ak47.common.YmlUtil;
+import com.wangyin.ak47.core.HandlerContext;
+import com.wangyin.ak47.core.Message;
 import com.wangyin.ak47.core.Request;
 import com.wangyin.ak47.core.Response;
 import com.wangyin.ak47.core.exception.Ak47RuntimeException;
@@ -53,8 +55,7 @@ public final class DubboHessianPipe extends AbstractDubboPipe<DubboHessianReques
 	    byte flag = dh.getFlag();
 	    if( (flag & FLAG_EVENT) != 0 ){
             // heart beat
-            // drop it.
-//	        return;
+	        // do nothing.
 	        
 	    }else if( (flag & SERIALIZATION_MASK) == HESSIAN_SERIALIZATION_ID ){
 	        // decode hessian
@@ -158,8 +159,7 @@ public final class DubboHessianPipe extends AbstractDubboPipe<DubboHessianReques
         byte flag = dh.getFlag();
         if( (flag & FLAG_EVENT) != 0 ){
             // heart beat
-            // drop it.  
-            return;
+            // do nothing.
             
         }else if( (flag & SERIALIZATION_MASK) == HESSIAN_SERIALIZATION_ID ){
             // decode hessian
@@ -210,5 +210,51 @@ public final class DubboHessianPipe extends AbstractDubboPipe<DubboHessianReques
         dd.setBody(body);
         
 	}
-
+	
+	
+    @Override
+    public boolean filterReceivedInStub(
+            HandlerContext<DubboHessianResponse, DubboHessianRequest> ctx, 
+            Message<DubboHessianRequest> msg){
+        
+        DubboHessianRequest dubboreq = msg.getPojo();
+        byte flag = dubboreq.getDubboHeader().getFlag();
+        if( (flag & FLAG_EVENT) != 0 ){
+            // heartbeat
+            Message<DubboHessianResponse> resmsg = msg.newMessage();
+            DubboHessianResponse dubbores = new DubboHessianResponse();
+            DubboHeader dh = dubbores.getDubboHeader();
+            dh.setFlag((byte)(dh.getFlag()|FLAG_EVENT));
+            resmsg.setPojo(dubbores);
+            
+            ctx.send(resmsg);
+            return true;
+        }else{
+            return false;
+        }
+    }
+    
+    @Override
+    public boolean filterReceivedInDriver(
+            HandlerContext<DubboHessianRequest, DubboHessianResponse> ctx, 
+            Message<DubboHessianResponse> msg){
+        
+        DubboHessianResponse dubbores = msg.getPojo();
+        byte flag = dubbores.getDubboHeader().getFlag();
+        if( (flag & FLAG_EVENT) != 0 ){
+            // heartbeat
+            Message<DubboHessianRequest> reqmsg = msg.newMessage();
+            DubboHessianRequest dubboreq = new DubboHessianRequest();
+            DubboHeader dh = dubboreq.getDubboHeader();
+            dh.setFlag((byte)(dh.getFlag()|FLAG_EVENT));
+            reqmsg.setPojo(dubboreq);
+            
+            ctx.send(reqmsg);
+            return true;
+        }else{
+            return false;
+        }
+    }
+    
+	
 }
