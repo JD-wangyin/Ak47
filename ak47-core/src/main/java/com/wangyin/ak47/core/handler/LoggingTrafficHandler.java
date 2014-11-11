@@ -5,8 +5,8 @@ import com.wangyin.ak47.core.HandlerContext;
 import com.wangyin.ak47.core.Message;
 import com.wangyin.ak47.core.Promise;
 
-public class LoggingOutbandHandler<O, I> extends HandlerAdapter<O, I> {
-    private static final Logger log = new Logger(LoggingOutbandHandler.class);
+public class LoggingTrafficHandler<O, I> extends HandlerAdapter<O, I> {
+    private static final Logger log = new Logger(LoggingTrafficHandler.class);
 
     @Override
     public void doSend(HandlerContext<O, I> ctx, Message<O> msg, 
