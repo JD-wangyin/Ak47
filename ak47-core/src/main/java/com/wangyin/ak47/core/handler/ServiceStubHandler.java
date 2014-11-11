@@ -9,7 +9,6 @@ import com.wangyin.ak47.core.message.SimpleRequest;
 import com.wangyin.ak47.core.message.SimpleResponse;
 import com.wangyin.ak47.common.Logger;
 import com.wangyin.ak47.core.FutureListener;
-import com.wangyin.ak47.core.Pipe;
 import com.wangyin.ak47.core.Future;
 import com.wangyin.ak47.core.HandlerContext;
 import com.wangyin.ak47.core.Message;
@@ -30,11 +29,9 @@ public class ServiceStubHandler<O, I> extends HandlerAdapter<O, I> {
     
     private Map<String, Service<I, O>> serviceChain;
     
-    private Pipe<I, O> pipe;
     
-    public ServiceStubHandler(Pipe<I, O> pipe){
+    public ServiceStubHandler(){
         serviceChain = new LinkedHashMap<String, Service<I, O>>();
-        this.pipe = pipe;
     }
     
 
@@ -83,13 +80,6 @@ public class ServiceStubHandler<O, I> extends HandlerAdapter<O, I> {
         }
         
         ctx.fireReceived(msg);
-        
     }
-
-//    @Override
-//    public void doSend(HandlerContext<O, I> ctx, Message<O> msg, 
-//            final Promise<O, I> promise) throws Exception {
-//        ctx.send(msg, promise);
-//    }
 
 }

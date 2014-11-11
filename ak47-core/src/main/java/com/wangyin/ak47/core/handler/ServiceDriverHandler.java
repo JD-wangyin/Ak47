@@ -8,7 +8,6 @@ import java.util.Map.Entry;
 import com.wangyin.ak47.core.message.SimpleRequest;
 import com.wangyin.ak47.core.message.SimpleResponse;
 import com.wangyin.ak47.common.Logger;
-import com.wangyin.ak47.core.Pipe;
 import com.wangyin.ak47.core.HandlerContext;
 import com.wangyin.ak47.core.Message;
 import com.wangyin.ak47.core.Service;
@@ -27,11 +26,9 @@ public class ServiceDriverHandler<O, I> extends HandlerAdapter<O, I> {
     private static final Logger log = new Logger(ServiceDriverHandler.class);
     
     private Map<String, Service<O, I>> serviceChain;
-    private Pipe<O, I> pipe;
     
-    public ServiceDriverHandler(Pipe<O, I> pipe){
+    public ServiceDriverHandler(){
         serviceChain = new HashMap<String, Service<O, I>>();
-        this.pipe = pipe;
     }
     
     public void addService(String name, Service<O, I> service) {
