@@ -68,7 +68,7 @@ import com.wangyin.ak47.core.Buffer;
  * @param <Q>       Request-POJO
  * @param <R>       Response-POJO
  */
-public abstract class Pipe<Q, R> implements Codec<Q, R>, Spliter, ExecutorFactory {
+public abstract class Pipe<Q, R> implements Codec<Q, R>, Filter<Q, R>, Spliter, ExecutorFactory {
     
     /**
      * Create a SimpleStub, for general use, such as Functional-Testing.
@@ -131,6 +131,18 @@ public abstract class Pipe<Q, R> implements Codec<Q, R>, Spliter, ExecutorFactor
         stub.setPort(port);
         return stub;
     }
+    
+    
+    @Override
+    public boolean filterReceivedInStub(HandlerContext<R, Q> ctx, Message<Q> msg){
+        return false;
+    }
+    
+    @Override
+    public boolean filterReceivedInDriver(HandlerContext<Q, R> ctx, Message<R> msg){
+        return false;
+    }
+    
 
     /**
      * 适用于pipeline的数据包，避免多线程同时读取。
