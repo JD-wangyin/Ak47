@@ -1,4 +1,4 @@
-package com.wangyin.ak47.boot;
+package com.wangyin.ak47.common;
 
 import java.net.URL;
 import java.net.URLClassLoader;

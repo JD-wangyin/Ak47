@@ -8,7 +8,7 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
-import com.wangyin.ak47.boot.DynamicClassLoader;
+import com.wangyin.ak47.common.DynamicClassLoader;
 
 /**
  * Package-related helper class
