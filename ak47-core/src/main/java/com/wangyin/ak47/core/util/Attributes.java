@@ -23,5 +23,9 @@ public class Attributes {
     public boolean has(String key){
         return attrmap.containsKey(key);
     }
+    
+    public void remove(String key){
+        attrmap.remove(key);
+    }
 
 }
