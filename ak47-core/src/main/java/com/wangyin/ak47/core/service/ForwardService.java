@@ -20,6 +20,8 @@ import com.wangyin.ak47.core.driver.SimpleDriver;
 public class ForwardService<Q, R> implements Service<Q, R> {
     private static final Logger log = new Logger(ForwardService.class);
     
+    private static final String KEY_FORWARD_DRIVER = "forwardDriver";
+    
     private Pipe<Q, R> pipe;
     private String forwardAddr;
     private int forwardPort;
@@ -43,8 +45,9 @@ public class ForwardService<Q, R> implements Service<Q, R> {
     }
 
     
+    // FIXME: This will be a synchronized BUG.
+//    private SimpleDriver<Q, R> fwdDriver;
     
-    private SimpleDriver<Q, R> fwdDriver;
     /**
      * 1、每次收到数据将新建connection。
      * 2、每次doservice结束将close connection。
@@ -55,20 +58,29 @@ public class ForwardService<Q, R> implements Service<Q, R> {
     @Override
     public void doService(Request<Q> request, Response<R> response)
             throws Exception {
+        
+        SimpleDriver<Q, R> fwdDriver = null;
+        if( request.sessionAttr().has(KEY_FORWARD_DRIVER) ){
+            fwdDriver = (SimpleDriver<Q, R>) request.sessionAttr().get(KEY_FORWARD_DRIVER);
+        }
+        
         if( isLongConnection && null != fwdDriver){
             // nothing
         }else{
             fwdDriver = pipe.createSimpleDriver(forwardAddr, forwardPort);
+            request.sessionAttr().set(KEY_FORWARD_DRIVER, fwdDriver);
         }
         
         R r = fwdDriver.send(request.pojo());
         response.pojo(r);
         
         if( !isLongConnection ){
+            request.sessionAttr().remove(KEY_FORWARD_DRIVER);
             fwdDriver.release();
             fwdDriver = null;
         }
         log.info("forward success.");
     }
-
+    
+    
 }
