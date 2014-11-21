@@ -3,13 +3,53 @@
   
   <groupId>com.wangyin</groupId>
   <artifactId>ak47-parent</artifactId>
-  <version>0.1.0-SNAPSHOT</version>
+  <version>0.1.0</version>
   <packaging>pom</packaging>
   
   <name>ak47-parent</name>
   <description>Ak47 - an easy Network Service Testing Framework</description>
   <url>https://github.com/JD-wangyin/Ak47</url>
+  
+  <parent>
+    <groupId>org.sonatype.oss</groupId>
+    <artifactId>oss-parent</artifactId>
+    <version>7</version>
+  </parent>
+  
+  <licenses>
+    <license>
+      <name>The Apache License, Version 2.0</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+    </license>
+  </licenses>
+  
+  <developers>
+    <developer>
+      <name>Yu Han</name>
+      <email>hannyu@gmail.com</email>
+      <organization>JD-wangyin</organization>
+      <organizationUrl>https://github.com/JD-wangyin</organizationUrl>
+    </developer>
+  </developers>
 
+  <scm>
+    <connection>scm:git:git://github.com/JD-wangyin/Ak47.git</connection>
+    <developerConnection>scm:git:ssh://git@github.com/JD-wangyin/Ak47.git</developerConnection>
+    <url>https://github.com/JD-wangyin/Ak47</url>
+  </scm>
+  
+  <distributionManagement>
+    <snapshotRepository>
+      <id>ossrh</id>
+      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+    </snapshotRepository>
+	<repository>
+      <id>ossrh</id>
+      <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+    </repository>
+  </distributionManagement>
+  
+  
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
