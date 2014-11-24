@@ -1,0 +1,69 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  
+
+  <parent>
+    <groupId>com.wangyin</groupId>
+    <artifactId>ak47-parent</artifactId>
+    <version>0.1.0</version>
+  </parent>
+  
+  <artifactId>ak47-runner</artifactId>
+  <name>ak47-runner</name>
+  <packaging>pom</packaging>
+  
+  <dependencies>
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>ak47-core</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+	<dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>ak47-pipe-http</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+	<dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>ak47-pipe-dubbo</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+	
+  </dependencies>
+  
+  <build>
+    <plugins>
+      
+      <!-- boot -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-assembly-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>assembly-boot</id>
+            <phase>package</phase>
+            <goals>
+                <goal>single</goal>
+            </goals>
+            <configuration>
+                <finalName>ak47-boot</finalName>
+                <appendAssemblyId>false</appendAssemblyId>
+                <archive>
+                    <manifest>
+                        <mainClass>com.wangyin.ak47.boot.Ak47Boot</mainClass>
+                    </manifest>
+                </archive>
+                <descriptors>
+                    <descriptor>src/main/resources/assembly-boot.xml</descriptor>
+                </descriptors>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+        
+        
+        
+    </plugins>
+  </build>
+  
+</project>
