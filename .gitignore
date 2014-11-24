@@ -12,6 +12,7 @@
 hs_err_pid*
 
 # Ak47 logs
+*/log
 *.log
 
 # Eclipse project files
@@ -31,4 +32,4 @@ bin/
 */target
 
 # Wangyin private
-ak47-wangyin
+wangyin/
