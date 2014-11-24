@@ -1,0 +1,77 @@
+<assembly xmlns="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.2 http://maven.apache.org/xsd/assembly-1.1.2.xsd">
+  <id>make-final-release</id>
+  <formats>
+    <format>zip</format>
+    <format>tar.gz</format>
+  </formats>
+  <includeBaseDirectory>true</includeBaseDirectory>
+  <baseDirectory>ak47-runner</baseDirectory>
+  
+  <fileSets>
+    <fileSet>
+      <outputDirectory>bin</outputDirectory>
+      
+      <directory>src/main/scripts</directory>
+      <fileMode>0755</fileMode>
+    </fileSet>
+    
+    <fileSet>
+      <outputDirectory>bin</outputDirectory>
+      <directory>target</directory>
+      <includes>
+          <include>ak47-boot.jar</include>
+      </includes>
+    </fileSet>
+    
+    <fileSet>
+      <outputDirectory>conf</outputDirectory>
+      <directory>conf</directory>
+    </fileSet>
+
+    <fileSet>
+      <outputDirectory>data</outputDirectory>
+      <directory>data</directory>
+    </fileSet>
+
+    <fileSet>
+      <outputDirectory>ext</outputDirectory>
+      <directory>ext</directory>
+    </fileSet>
+
+    <fileSet>
+      <outputDirectory>log</outputDirectory>
+      <directory>log</directory>
+      <excludes>
+          <exclude>*.log</exclude>
+      </excludes>
+    </fileSet>
+    
+    <fileSet>
+      <outputDirectory>/</outputDirectory>
+      <directory>src/main/resources</directory>
+      <includes>
+        <include>README*</include>
+      </includes>
+    </fileSet>
+    
+    <fileSet>
+      <outputDirectory>lib</outputDirectory>
+      
+      <directory>../*/target</directory>
+      <includes>
+        <include>ak47-*.jar</include>
+      </includes>
+    </fileSet>
+  </fileSets>
+  
+  
+  <dependencySets> 
+    <dependencySet> 
+      <outputDirectory>lib</outputDirectory> 
+      <scope>runtime</scope>
+      <useProjectArtifact>false</useProjectArtifact>
+    </dependencySet>
+  </dependencySets>
+  
+</assembly>

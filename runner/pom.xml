@@ -28,6 +28,11 @@
       <artifactId>ak47-pipe-dubbo</artifactId>
       <version>${project.version}</version>
     </dependency>
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>ak47-example</artifactId>
+      <version>${project.version}</version>
+    </dependency>
 	
   </dependencies>
   
@@ -39,6 +44,8 @@
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-assembly-plugin</artifactId>
         <executions>
+            
+          <!--  -->
           <execution>
             <id>assembly-boot</id>
             <phase>package</phase>
@@ -58,6 +65,22 @@
                 </descriptors>
             </configuration>
           </execution>
+          
+          <execution>
+            <id>assembly-runner</id>
+            <phase>package</phase>
+            <goals>
+              <goal>single</goal>
+            </goals>
+            <configuration>
+              <finalName>ak47-runner</finalName>
+              <appendAssemblyId>false</appendAssemblyId>
+              <descriptors>
+                <descriptor>src/main/resources/assembly-runner.xml</descriptor>
+              </descriptors>
+            </configuration>
+          </execution>
+          
         </executions>
       </plugin>
         
