@@ -61,33 +61,6 @@
   <build>
     <plugins>
       
-      <!-- boot -->
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-assembly-plugin</artifactId>
-        <executions>
-          <execution>
-            <id>assembly-boot</id>
-            <phase>package</phase>
-            <goals>
-                <goal>single</goal>
-            </goals>
-            <configuration>
-                <finalName>ak47-boot</finalName>
-                <appendAssemblyId>false</appendAssemblyId>
-                <archive>
-                    <manifest>
-                        <mainClass>com.wangyin.ak47.boot.Ak47Boot</mainClass>
-                    </manifest>
-                </archive>
-                <descriptors>
-                    <descriptor>src/main/resources/assembly-boot.xml</descriptor>
-                </descriptors>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
-      
       <!-- jar -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
