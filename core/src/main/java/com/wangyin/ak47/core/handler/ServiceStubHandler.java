@@ -71,14 +71,15 @@ public class ServiceStubHandler<O, I> extends HandlerAdapter<O, I> {
                     future.addListener(FutureListener.CLOSE_ON_COMPLETE);
                 }
             }else{
+                log.debug("Do all service done, but no response.");
                 if(response.isDisconnectOnComplete()){
                     ctx.disconnect();
                 }
             }
             
-            
         }
         
+        // why do this?
         ctx.fireReceived(msg);
     }
 
