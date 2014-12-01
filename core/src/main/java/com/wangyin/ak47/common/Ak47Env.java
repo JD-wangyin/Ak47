@@ -54,13 +54,14 @@ public class Ak47Env {
     // ext_dir is NOT fixed
     public static String AK47_HOME_EXT_DIR;
     static {
+        
         String jarUrl = Ak47Env.class.getProtectionDomain().getCodeSource().getLocation()
                 .getFile();
-        String jarPath = "/";
+        String jarPath = "./";
         try{
             jarPath = URLDecoder.decode(jarUrl, "UTF-8");
         }catch(UnsupportedEncodingException e){
-//            log.error("APP_CONF_DIR init fail. jarUrl is {}.", jarUrl);
+            System.err.println("APP_CONF_DIR init fail. jarUrl is "+jarUrl+".");
         }
         
         File jarFile = new File(jarPath);
@@ -72,19 +73,8 @@ public class Ak47Env {
         AK47_HOME_LOG_DIR = AK47_HOME_DIR + "log";
         AK47_HOME_EXT_DIR = AK47_HOME_DIR + "ext";
         System.setProperty("ak47.home", AK47_HOME_DIR);
+        
     } 
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     
     
     
