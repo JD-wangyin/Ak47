@@ -19,6 +19,11 @@ public class RandomFuzzHandler<O, I> extends HandlerAdapter<O, I> {
 
 	private int fuzzPermillage;
 	private SimpleFuzz fuzz;
+	
+	public RandomFuzzHandler(int fuzzPermillage) {
+	    this(fuzzPermillage, 0);
+    }
+
 
 	public RandomFuzzHandler(int fuzzPermillage, int seed) {
 		super();
