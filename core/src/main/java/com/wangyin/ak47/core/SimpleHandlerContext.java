@@ -141,8 +141,9 @@ public class SimpleHandlerContext<O, I> implements HandlerContext<O, I>{
     }
     
     private void notifyOutboundException(Throwable cause, Promise<O, I> promise) {
+        log.error("An exception of outbound event is fired.", cause);
         if( !promise.tryFailure(cause) ){
-            log.warn("Failed to fail the promise because it's done already: {}", promise, cause);
+            log.error("Failed to fail the promise because it's done already: {}", promise, cause);
         }
     }
 }
