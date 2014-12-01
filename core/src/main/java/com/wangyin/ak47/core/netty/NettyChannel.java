@@ -164,10 +164,8 @@ public class NettyChannel<O, I> implements Channel<O, I> {
         @Override
         public void send(Message<O> msg, Promise<O, I> promise) {
             NettyBuffer buf = (NettyBuffer) msg.getBuffer();
-            log.error("buf: {}.", buf.getByteBuf().readableBytes());
             byte[] bytes = new byte[buf.getByteBuf().readableBytes()];
             buf.getByteBuf().copy().readBytes(bytes);
-            log.error("cnt: {}.", new String(bytes));
             
             NettyPromise<O, I> np = (NettyPromise<O, I>) promise;
             realChannel.writeAndFlush(buf.getByteBuf(), np.channelPromise());
