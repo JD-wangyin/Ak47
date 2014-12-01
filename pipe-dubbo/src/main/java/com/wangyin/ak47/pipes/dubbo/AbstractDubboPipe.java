@@ -138,7 +138,6 @@ public abstract class AbstractDubboPipe<Q, R> extends Pipe<Q, R> {
         
         Long requestId = (Long) response.requestAttr().get(KEY_CURRENT_REQUEST_ID);
         if( requestId != null ){
-            log.warn("encodeResponse requestId: {}", requestId);
             dh.setRequestId(requestId);
         }
         
