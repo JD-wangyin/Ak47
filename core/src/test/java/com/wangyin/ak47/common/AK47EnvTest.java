@@ -6,7 +6,7 @@ import org.testng.annotations.Test;
 import com.wangyin.ak47.common.Ak47Env;
 
 
-public class AK47EnvTest {
+public class Ak47EnvTest {
     
     @Test
     public void testme(){
