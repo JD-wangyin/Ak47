@@ -20,7 +20,7 @@
       <outputDirectory>bin</outputDirectory>
       <directory>target</directory>
       <includes>
-          <include>ak47-boot.jar</include>
+        <include>ak47-boot.jar</include>
       </includes>
     </fileSet>
     
@@ -43,7 +43,7 @@
       <outputDirectory>log</outputDirectory>
       <directory>log</directory>
       <excludes>
-          <exclude>*.log</exclude>
+        <exclude>*.log</exclude>
       </excludes>
     </fileSet>
     
@@ -60,7 +60,7 @@
       
       <directory>../*/target</directory>
       <includes>
-        <include>ak47-*.jar</include>
+        <include>ak47-*-${project.version}.jar</include>
       </includes>
     </fileSet>
   </fileSets>
