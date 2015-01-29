@@ -7,11 +7,6 @@ Ak47 can support almost all network protocols, such as [HTTP](http://en.wikipedi
 
 Ak47 is base on [Netty](http://netty.io)/[NIO](http://en.wikipedia.org/wiki/Non-blocking_I/O_(Java)), and its design philosophy is simple to use, scalable, and high performance.
 
-## WIKI
-
-Welcome to the AK47 wiki. Please head to [\[User Guide\]](User-Guide).
-
-欢迎来到Ak47主页，请转到[\[用户指南\]](用户指南)。
 
 ## Examples
 A Simple Http Driver
@@ -84,3 +79,8 @@ Please feel free to contribute code or documentation. [Pull Requests](https://he
 You can try [creating an issue](https://help.github.com/articles/creating-an-issue/), or 
 [searching issues](https://help.github.com/articles/searching-issues/), Or contact to [hannyu](https://github.com/hannyu).
 
+## WIKI
+
+Welcome to the AK47 wiki. Please head to [\[User Guide\]](https://github.com/JD-wangyin/Ak47/wiki/User-Guide).
+
+欢迎来到Ak47主页，请转到[\[用户指南\]](https://github.com/JD-wangyin/Ak47/wiki/%E7%94%A8%E6%88%B7%E6%8C%87%E5%8D%97)。
