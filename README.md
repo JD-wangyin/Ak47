@@ -3,17 +3,11 @@ Ak47
 
 Ak47 is an easy [Network Service](http://en.wikipedia.org/wiki/Network_service) Testing Framework. It is a Test-Specific Framework, designed for better [Automation-Testing](http://en.wikipedia.org/wiki/Test_automation), [Performance-Testing](http://en.wikipedia.org/wiki/Performance_testing), [Mock-Testing](http://en.wikipedia.org/wiki/Mock_object) and with the same code style.
 
-Ak47 can support almost all network protocols, such as [HTTP](http://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol), [Hession](http://hessian.caucho.com/), [ISO8583](http://en.wikipedia.org/wiki/ISO_8583), [Dubbo](https://github.com/alibaba/dubbo), [Thrift](https://thrift.apache.org/), and any other [RPC](http://en.wikipedia.org/wiki/Remote_procedure_call) protocols. 
+Ak47 can support almost all network protocols, such as [HTTP](http://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol), [Hession](http://hessian.caucho.com/), [ISO8583](http://en.wikipedia.org/wiki/ISO_8583), [Dubbo](https://github.com/alibaba/dubbo), [Thrift](https://thrift.apache.org/), and other [RPC](http://en.wikipedia.org/wiki/Remote_procedure_call) protocols. 
 
-Ak47 is base on [Netty](http://netty.io)/[NIO](http://en.wikipedia.org/wiki/Non-blocking_I/O_(Java)), and it has a good performance. 
+Ak47 is base on [Netty](http://netty.io)/[NIO](http://en.wikipedia.org/wiki/Non-blocking_I/O_(Java)), and its design philosophy is simple to use, scalable, and high performance.
 
 
-## Features
-
-- **Simplicity**: 
-- **Scalable**: 
-- **Performance**: 
-- **3-in-one**: 
 
 ## Examples
 A Simple Http Driver
