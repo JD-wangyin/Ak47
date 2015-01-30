@@ -3,7 +3,7 @@ Ak47
 
 Ak47 is an easy [Network Service](http://en.wikipedia.org/wiki/Network_service) Testing Framework. It is a Test-Specific Framework, designed for better [Automation-Testing](http://en.wikipedia.org/wiki/Test_automation), [Performance-Testing](http://en.wikipedia.org/wiki/Performance_testing), [Mock-Testing](http://en.wikipedia.org/wiki/Mock_object) and with the same code style.
 
-Ak47 can support almost all network protocols, such as [HTTP](http://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol), [Hession](http://hessian.caucho.com/), [ISO8583](http://en.wikipedia.org/wiki/ISO_8583), [Dubbo](https://github.com/alibaba/dubbo), [Thrift](https://thrift.apache.org/), and other [RPC](http://en.wikipedia.org/wiki/Remote_procedure_call) protocols. 
+Ak47 can support almost all network protocols, such as [HTTP](http://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol), [Hession](http://hessian.caucho.com/), [ISO8583](http://en.wikipedia.org/wiki/ISO_8583), [Dubbo](https://github.com/alibaba/dubbo), [Thrift](https://thrift.apache.org/), and other [RPC](http://en.wikipedia.org/wiki/Remote_procedure_call) protocols, only if there is a corresponding [Pipe](#).
 
 Ak47 is base on [Netty](http://netty.io)/[NIO](http://en.wikipedia.org/wiki/Non-blocking_I/O_(Java)), and its design philosophy is simple to use, scalable, and high performance.
 
@@ -71,13 +71,15 @@ Note that this is build-time requirement.  JDK 6 is enough to run your AK47-base
 
 Ak47 is free software/open source, and is distributed under the [Apache License 2.0](http://www.apache.org/licenses/LICENSE-2.0).
 
-Please feel free to contribute code or documentation. [Pull Requests](https://help.github.com/articles/using-pull-requests/) are welcome!
+Please feel free to contribute code or documentation. Welcome to [Pull Requests](https://help.github.com/articles/using-pull-requests/).
+
+The code contributors: [hannyu](hannyu@gmail.com), [xwliang](liangxiaowu2008@163.com), [nabokil](672162494@qq.com).
 
 
 ## Questions?
 
 You can try [creating an issue](https://help.github.com/articles/creating-an-issue/), or 
-[searching issues](https://help.github.com/articles/searching-issues/), Or contact to [hannyu](https://github.com/hannyu).
+[searching issues](https://help.github.com/articles/searching-issues/), Or email to [hannyu](hannyu@gmail.com).
 
 ## WIKI
 
