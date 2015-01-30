@@ -73,13 +73,13 @@ Ak47 is free software/open source, and is distributed under the [Apache License 
 
 Please feel free to contribute code or documentation. Welcome to [Pull Requests](https://help.github.com/articles/using-pull-requests/).
 
-The code contributors: [hannyu](hannyu@gmail.com), [xwliang](liangxiaowu2008@163.com), [nabokil](672162494@qq.com).
+The code contributors: [hannyu](mailto:hannyu@gmail.com), [xwliang](mailto:liangxiaowu2008@163.com), [nabokil](mailto:672162494@qq.com).
 
 
 ## Questions?
 
 You can try [creating an issue](https://help.github.com/articles/creating-an-issue/), or 
-[searching issues](https://help.github.com/articles/searching-issues/), Or email to [hannyu](hannyu@gmail.com).
+[searching issues](https://help.github.com/articles/searching-issues/), Or email to [hannyu](mailto:hannyu@gmail.com).
 
 ## WIKI
 
