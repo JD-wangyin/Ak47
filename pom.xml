@@ -23,14 +23,11 @@
     </license>
   </licenses>
   
-  <developers>
-    <developer>
-      <name>Yu Han</name>
-      <email>hannyu@gmail.com</email>
-      <organization>JD-wangyin</organization>
-      <organizationUrl>https://github.com/JD-wangyin</organizationUrl>
-    </developer>
-  </developers>
+  <organization>
+    <name>JD-wangyin</name>
+    <url>https://github.com/JD-wangyin</url>
+  </organization>
+
 
   <scm>
     <connection>scm:git:git://github.com/JD-wangyin/Ak47.git</connection>
