@@ -8,7 +8,7 @@ import com.wangyin.ak47.core.exception.Ak47RuntimeException;
 
 /**
  * AK47 default global configuration. 
- * Prefix {@see ConfigLoader} is 'ak47'.
+ * Prefix @see ConfigLoader is 'ak47'.
  * 
  * AK47默认的自身的全局配置。
  * 

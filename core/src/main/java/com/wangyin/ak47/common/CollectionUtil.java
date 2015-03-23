@@ -118,8 +118,8 @@ public class CollectionUtil {
     /**
      * Convert array to List
      * 
-     * Example: List<String> stooges = ArrayUtil.array2List("Larry", "Moe",
-     * "Curly");
+     * Example: {@code List<String> stooges = ArrayUtil.array2List("Larry", "Moe",
+     * "Curly");}
      * 
      * @param array
      *            array of objects
