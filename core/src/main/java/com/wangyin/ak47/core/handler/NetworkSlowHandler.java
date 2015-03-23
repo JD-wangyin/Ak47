@@ -13,7 +13,6 @@ import com.wangyin.ak47.core.message.SimpleMessage;
 /**
  * 
  * @author wyhubingyin
- * @date 2014年4月24日
  */
 public class NetworkSlowHandler<O, I>  extends HandlerAdapter<O, I> {
     private static final Logger log = new Logger(NetworkSlowHandler.class);
@@ -26,7 +25,7 @@ public class NetworkSlowHandler<O, I>  extends HandlerAdapter<O, I> {
 
 	/**
 	 * 
-	 * @param speedLimit   ? bytes per second
+	 * @param sendSpeedLimit send how many bytes per second
 	 */
 	public NetworkSlowHandler(int sendSpeedLimit) {
 	    if( sendSpeedLimit <= 0 ){

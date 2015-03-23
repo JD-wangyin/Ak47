@@ -28,9 +28,9 @@ import com.wangyin.ak47.core.Buffer;
  * Pipe can become a network entity, only after creating a Stub or Driver.
  *                                             
  *    +--------+     request     +--------+
- *    |        | --------------> |        |       
+ *    |        | --------------+ |        |       
  *    | Client |                 | Server |      
- *    |        | <-------------- |        |      
+ *    |        | +-------------- |        |      
  *    +--------+     response    +--------+      
  *                                               
  *                     | |                       
@@ -39,20 +39,20 @@ import com.wangyin.ak47.core.Buffer;
  *                     \ /       +---------------+
  *                      '        |          Pipe |
  *    +--------+     request     +------+        |
- *    |        | --------------> |      |        |
+ *    |        | --------------+ |      |        |
  *    | Client |                 | Stub |        |
- *    |        | <-------------- |      |        |
+ *    |        | +-------------- |      |        |
  *    +--------+     response    |------+        |
  *                               +---------------+
  *                                               
- *                      &                        
+ *                      and                        
  *
  *   +--------------+
  *   | Pipe         |
  *   |       +------+     request     +--------+
- *   |       |      | --------------> |        |
+ *   |       |      | --------------+ |        |
  *   |       |Driver|                 | Server |
- *   |       |      | <-------------- |        |
+ *   |       |      | +-------------- |        |
  *   |       +------|     response    +--------+
  *   +--------------+
  *
@@ -65,8 +65,8 @@ import com.wangyin.ak47.core.Buffer;
  * 
  * @author hannyu
  * 
- * @param <Q>       Request-POJO
- * @param <R>       Response-POJO
+ * @param <Q>       Request POJO
+ * @param <R>       Response POJO
  */
 public abstract class Pipe<Q, R> implements Codec<Q, R>, Filter<Q, R>, Spliter, ExecutorFactory {
     

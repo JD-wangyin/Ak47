@@ -108,7 +108,6 @@
           <version>false</version>
           <author>false</author>
           <keywords>true</keywords>
-          <failOnError>false</failOnError>
         </configuration>
         <executions>
           <execution>

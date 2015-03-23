@@ -19,8 +19,9 @@ import java.util.Map.Entry;
  */
 public class HttpUtil {
     
+    
     /**
-     * Convert Map<String, String> to body of HTTP, such as:
+     * Convert {@code Map<String, String>} to body of HTTP, such as:
      * 
      *  Map {
      *      wd: ""
@@ -28,16 +29,18 @@ public class HttpUtil {
      *      json: "1"
      *      p: "3"
      *      bs: "test ak47"
-     *  }                     ===>      wd=&zxmode=1&json=1&p=3&bs=test%20ak47
+     *  }                     {@code ===>      wd=&zxmode=1&json=1&p=3&bs=test%20ak47}
      * 
      * 
      * 将Map转化为Http协议的body
      * 
-     * @param bodyMap
-     * @return
+     * @param bodyMap map of http body
+     * @return string of content
      * @throws UnsupportedEncodingException 
      */
-    public static String map2Body(Map<String, String> bodyMap) throws UnsupportedEncodingException{
+    public static String map2Body(Map<String, String> bodyMap) 
+            throws UnsupportedEncodingException{
+        
         StringBuilder sb = new StringBuilder(64);
         int i = 0;
         for(Entry<String, String> en : bodyMap.entrySet() ){
@@ -56,20 +59,21 @@ public class HttpUtil {
     }
     
     /**
-     * Convert body of HTTP to Map<String, String>, such as:
+     * Convert body of HTTP to {@code Map<String, String>}, such as:
      * 
-     *  wd=&zxmode=1&json=1&p=3&bs=test%20ak47   ===>   Map {
-     *                                                      wd: ""
-     *                                                      zxmode: "1"
-     *                                                      json: "1"
-     *                                                      p: "3"
-     *                                                      bs: "test ak47"
-     *                                                  }
+     *  {@code wd=&zxmode=1&json=1&p=3&bs=test%20ak47   ===>}   
+     *                            Map {
+     *                                wd: ""
+     *                                zxmode: "1"
+     *                                json: "1"
+     *                                p: "3"
+     *                                bs: "test ak47"
+     *                            }
      * 
      * 将Http的body转化为Map
      * 
-     * @param body
-     * @return
+     * @param body string of http body
+     * @return map of http body
      * @throws UnsupportedEncodingException 
      */
     public static Map<String, String> body2Map(String body) throws UnsupportedEncodingException{

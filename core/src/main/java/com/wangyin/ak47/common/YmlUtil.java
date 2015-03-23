@@ -40,8 +40,8 @@ public class YmlUtil {
      * 
      * 将Object转化为文本，优化打印，不压缩。
      * 
-     * @param obj
-     * @return
+     * @param obj object
+     * @return yaml text
      */
     public static String obj2PrettyYml(Object obj){
         DumperOptions options = new DumperOptions();
@@ -55,8 +55,8 @@ public class YmlUtil {
      * 
      * 将文本转化为Object
      * 
-     * @param obj
-     * @return
+     * @param yml yaml text
+     * @return object
      */
     public static Object yml2Obj(String yml){
         Yaml yaml = new Yaml();

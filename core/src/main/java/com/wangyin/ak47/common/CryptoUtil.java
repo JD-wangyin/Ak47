@@ -20,7 +20,7 @@ import javax.crypto.spec.IvParameterSpec;
 /**
  * Crypto-related helper class
  * 
- * WARNING: All methods are thread-safe!!!
+ * NOTE: All methods are thread-safe.
  * 
  * 加解密工具类
  * 
@@ -45,10 +45,10 @@ public class CryptoUtil {
      *      
      * DES加密
      * 
-     * @param input
-     * @param key
-     * @param transformation
-     * @return
+     * @param input source bytes to be encrypted
+     * @param key key of encryption
+     * @param transformation like DES/CBC/PKCS5Padding
+     * @return encrypted bytes
      * @throws IllegalBlockSizeException
      * @throws BadPaddingException
      * @throws NoSuchAlgorithmException
@@ -76,10 +76,10 @@ public class CryptoUtil {
      * 
      * 注： 所有方法均是线程安全的！！
      * 
-     * @param input
-     * @param key
-     * @param transformation
-     * @return
+     * @param input source bytes to be decrypted
+     * @param key key of decryption
+     * @param transformation like DES/CBC/PKCS5Padding
+     * @return decrypted bytes
      * @throws IllegalBlockSizeException
      * @throws BadPaddingException
      * @throws NoSuchAlgorithmException

@@ -27,9 +27,9 @@ public interface Driver<Q, R> {
 
 
     /**
-     * 添加PipeInitializer
+     * add HandlerInitializer
      * 
-     * @param pipeInit
+     * @param userInitializer
      */
     public void userInitializer(HandlerInitializer<Q, R> userInitializer);
     

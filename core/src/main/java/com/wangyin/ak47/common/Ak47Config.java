@@ -54,8 +54,8 @@ public class Ak47Config {
      * 
      * 是否包含某配置？
      * 
-     * @param key
-     * @return
+     * @param key                   key of configuration item
+     * @return                      true if contains
      */
     public static boolean containsKey(String key){
         load();
@@ -68,8 +68,8 @@ public class Ak47Config {
      * 
      * 返回对象，自行解读
      * 
-     * @param key
-     * @return
+     * @param key                   key of configuration item
+     * @return                      value of configuration item
      */
     public static Object get(String key){
         load();
@@ -84,8 +84,8 @@ public class Ak47Config {
      * 
      * 注： 如果 key 不存在，那么会返回 ""，注意不是 null。
      * 
-     * @param key
-     * @return
+     * @param key                   key of configuration item
+     * @return                      return the value in String, or "" if NOT contains key.
      */
     public static String getString(String key){
         Object obj = get(key);
@@ -103,8 +103,8 @@ public class Ak47Config {
      * 返回 int
      * 
      * 注： 如果 key 不存在，那么会返回 0。
-     * @param key
-     * @return
+     * @param key                   key of configuration item
+     * @return                      return the value in Integer, 0 if NOT contains key
      */
     public static int getInt(String key){
         Object obj = get(key);
@@ -120,8 +120,8 @@ public class Ak47Config {
      * 
      * 返回true或false，如果不存在则返回false。
      * 
-     * @param key
-     * @return
+     * @param key                   key of configuration item
+     * @return                      return the value in Boolean, false if NOT contains key
      */
     public static boolean getBoolean(String key){
         Object obj = get(key);

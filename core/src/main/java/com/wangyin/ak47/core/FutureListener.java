@@ -16,7 +16,7 @@ public interface FutureListener extends EventListener {
     /**
      * Invoked when the operation associated with the {@link Future} has been completed.
      * 
-     * @param ctx
+     * @param channel
      * @throws Exception 
      */
     public <O, I> void onComplete(Channel<O, I> channel) throws Exception;

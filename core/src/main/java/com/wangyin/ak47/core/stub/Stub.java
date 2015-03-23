@@ -5,7 +5,7 @@ import com.wangyin.ak47.core.handler.HandlerInitializer;
 /**
  * Stub base
  * 
- * @author wyhanyu
+ * @author hannyu
  * 
  * @param <Q>
  * @param <R>
@@ -32,14 +32,13 @@ public interface Stub<Q, R> {
     /**
      * 启动server，开启服务。
      * 
-     * @return
+     * @throws Exception
      */
     public void start() throws Exception;
 
     /**
      * hold住，一直运行。
      * 
-     * @return
      * @throws Exception
      */
     public void hold() throws Exception;
@@ -48,7 +47,7 @@ public interface Stub<Q, R> {
     /**
      * 停止服务
      * 
-     * @return
+     * @throws Exception
      */
     public void stop() throws Exception;
 
@@ -60,9 +59,9 @@ public interface Stub<Q, R> {
 
 
     /**
-     * 添加PipeInitializer
+     * add userInitializer
      * 
-     * @param pipeInit
+     * @param userInitializer
      */
     public void userInitializer(HandlerInitializer<R, Q> userInitializer);
 

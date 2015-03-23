@@ -34,7 +34,7 @@ public class HandlerChain<O, I> {
 	/**
 	 * 添加到最后
 	 * 
-	 * addLast(c):   head->a->b->tail  ==>  head->a->b->c->tail
+	 * addLast(c):   {@code head->a->b->tail  ==>  head->a->b->c->tail}
 	 * 
 	 * 
 	 * @param name     Handler名
@@ -58,7 +58,7 @@ public class HandlerChain<O, I> {
 	/**
 	 * 添加到开始
 	 * 
-	 * addFirst(c):   head->a->b->tail  ==>  head->c->a->b->tail
+	 * addFirst(c):   {@code head->a->b->tail  ==>  head->c->a->b->tail}
 	 * 
 	 * @param name
 	 * @param handler
@@ -81,7 +81,7 @@ public class HandlerChain<O, I> {
 	/**
 	 * 删除handler
 	 * 
-	 * remove(b):  head->a->b->tail  ===>  head->a->tail
+	 * remove(b):  {@code head->a->b->tail  ===>  head->a->tail}
 	 * 
 	 * @param handler
 	 * @return
@@ -127,8 +127,8 @@ public class HandlerChain<O, I> {
 	
 
     /**
-     * Inbound: head->next->next->...->tail
-     * Outbound: tail->prev->prev->...->head
+     * Inbound:  {@code head->next->next->...->tail}
+     * Outbound: {@code tail->prev->prev->...->head}
      * 
      * @author hannyu
      *

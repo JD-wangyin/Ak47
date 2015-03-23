@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
 
-
 /**
  * Compress-related helper class
  *
@@ -16,29 +15,28 @@ import java.util.zip.GZIPOutputStream;
  * 
  */
 public class CompressUtil {
-//    private static final Logger log = new Logger(CompressUtil.class);
-    
-    public static final int READ_BUFFER_SIZE = 1024*8;
-    
+
+    public static final int READ_BUFFER_SIZE = 1024 * 8;
+
     /**
      * GZIP compression
      * 
      * GZIP压缩
      * 
-     * @param content
-     * @return
-     * @throws IOException
+     * @param content                       source bytes to be compressed
+     * @return                              compressed bytes 
+     * @throws IOException                  i/o wrong
      */
-    public static byte[] compressGzip(byte[] content) throws IOException{
+    public static byte[] compressGzip(byte[] content) throws IOException {
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         GZIPOutputStream gos = new GZIPOutputStream(bos);
-        try{
+        try {
             gos.write(content);
             gos.flush();
-        }finally{
+        } finally {
             gos.close();
         }
-        
+
         return bos.toByteArray();
     }
 
@@ -47,25 +45,28 @@ public class CompressUtil {
      * 
      * GZIP解压
      * 
-     * @param compressed
-     * @return
-     * @throws IOException 
+     * @param compressed                    sources bytes to be decompressed
+     * @return                              decompressed bytes
+     * @throws IOException                  i/o wrong
      */
-    public static byte[] decompressGzip(byte[] compressed) throws IOException{
+    public static byte[] decompressGzip(byte[] compressed) throws IOException {
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         ByteArrayInputStream bis = new ByteArrayInputStream(compressed);
         GZIPInputStream gis = new GZIPInputStream(bis);
-        try{
+        try {
             byte[] buffer = new byte[READ_BUFFER_SIZE];
             int read = 0;
-            while ( (read = gis.read(buffer)) != -1 ) {
+            while ((read = gis.read(buffer)) != -1) {
                 bos.write(buffer, 0, read);
             }
-        }finally{
+        } finally {
             gis.close();
         }
-        
+
         return bos.toByteArray();
     }
+
+    
+    
     
 }

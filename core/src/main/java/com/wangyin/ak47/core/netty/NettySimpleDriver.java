@@ -173,10 +173,9 @@ public class NettySimpleDriver<Q, R> implements SimpleDriver<Q, R>{
         }
     }
     
+
     /**
      * 释放所有资源，不可再使用
-     * 
-     * @throws Exception
      */
     public void release(){
         try {

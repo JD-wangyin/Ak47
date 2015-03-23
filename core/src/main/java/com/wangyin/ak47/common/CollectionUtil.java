@@ -12,62 +12,69 @@ import java.util.List;
  * 
  */
 public class CollectionUtil {
-    
+
     /**
      * Add obj to list if obj is NOT exsit in list, otherwise dont do any thing.
      * 
      * @param list
+     *            a list
      * @param obj
+     *            the object may to be added
      */
-    public static <T> void addIfNotExist(List<T> list, T obj){
+    public static <T> void addIfNotExist(List<T> list, T obj) {
         boolean isexist = false;
-        for(T t : list){
-            if( t.equals(obj) ){
+        for (T t : list) {
+            if (t.equals(obj)) {
                 isexist = true;
                 break;
             }
         }
-        if( !isexist ){
+        if (!isexist) {
             list.add(obj);
         }
     }
-    
+
     /**
-     * Shift left the given string array with 1 step, discard the original leftmost ones.
+     * Shift left the given string array with 1 step, discard the original
+     * leftmost ones.
      * 
      * See: like Linux shell shift
      * 
      * 将字符串数组左移一位，丢弃原最左边的对象
      * 
      * @param array
-     * @return
+     *            string array
+     * @return string array to be shifted
      */
-    public static String[] shift(String[] array){
+    public static String[] shift(String[] array) {
         return shift(array, 1);
     }
-    
+
     /**
-     * Shift left the given string array with N step, discard the original leftmost ones.
+     * Shift left the given string array with N step, discard the original
+     * leftmost ones.
      * 
      * 将字符串数组左移n位，原最左边的对象丢弃
      * 
      * @param array
-     * @return
+     *            string array
+     * @param n
+     *            number of shifted
+     * @return string array to be shifted
      */
-    public static String[] shift(String[] array, int n){
-        if( n <= 0 ){
+    public static String[] shift(String[] array, int n) {
+        if (n <= 0) {
             throw new IllegalArgumentException("n must a non-negative number.");
         }
-        
-        if( n >= array.length ){
+
+        if (n >= array.length) {
             return new String[0];
         }
-        
-        String[] dest = new String[array.length-n];
-        System.arraycopy(array, n, dest, 0, array.length-n);
+
+        String[] dest = new String[array.length - n];
+        System.arraycopy(array, n, dest, 0, array.length - n);
         return dest;
     }
-    
 
     /**
      * Merge an array of string to a big string.
@@ -75,99 +82,89 @@ public class CollectionUtil {
      * 将 array 合并成 string
      * 
      * @param array
-     * @return
+     *            object array
+     * @return a joined string
      */
     @SafeVarargs
-    public static <T> String array2String(T... array){
+    public static <T> String array2String(T... array) {
         int len = array.length;
-        if( len == 0 ){
+        if (len == 0) {
             return "";
         }
-        
+
         StringBuilder sb = new StringBuilder();
         sb.append("[").append(array[0]);
-        for(int i=1; i<array.length; i++){
+        for (int i = 1; i < array.length; i++) {
             sb.append(",").append(array[i]);
         }
         sb.append("]");
-        
+
         return sb.toString();
     }
-    
+
     /**
      * Merge a list of string to a big string.
      * 
      * 将list转成string
      * 
      * @param list
-     * @return
+     *            list of object
+     * @return a joined string
      */
-    public static String list2String(List<?> list){
+    public static String list2String(List<?> list) {
         return array2String(list2Array(list));
     }
-	
-    
-	/**
-	 * Convert array to List
-	 * 
-	 * Example:
-	 *     List<String> stooges = ArrayUtil.array2List("Larry", "Moe", "Curly");
-	 *     
-	 * @param array
-	 * @return
-	 */
+
+    /**
+     * Convert array to List
+     * 
+     * Example: List<String> stooges = ArrayUtil.array2List("Larry", "Moe",
+     * "Curly");
+     * 
+     * @param array
+     *            array of objects
+     * @return list of objects
+     */
     @SafeVarargs
     public static <T> List<T> array2List(T... array) {
-	    return Arrays.asList(array);
-	}
-	
-	/**
-	 * Convert List to array
-	 * 
-	 * Example:
-	 *     String[] myarray = (String[]) ArrayUtil.list2Array(mylist);
-	 * 
-	 * @param list
-	 * @return
-	 */
-	public static <T> Object[] list2Array(List<T> list) {
-	    return list.toArray();
-	}
-	
+        return Arrays.asList(array);
+    }
+
     /**
-     * 将list转成string, 
+     * Convert List to array
+     * 
+     * Example: String[] myarray = (String[]) ArrayUtil.list2Array(mylist);
+     * 
      * 
      * @param list
-     * @param separator     分隔符
-     * @return
+     *            list of objects
+     * @return array of objects
      */
-    public static String join(List<String> list, String separator){
+    public static <T> Object[] list2Array(List<T> list) {
+        return list.toArray();
+    }
 
-        if( list == null || list.size() == 0 ){
+    /**
+     * Convert list of string to a joined string.
+     * 
+     * @param list
+     *            list of strings
+     * @param separator
+     *            separator between strings
+     * @return a joined string
+     */
+    public static String join(List<String> list, String separator) {
+
+        if (list == null || list.size() == 0) {
             return "";
         }
         StringBuilder sb = new StringBuilder();
         sb.append(list.get(0));
         int size = list.size();
-        for(int i=1;i<size;i++){
+        for (int i = 1; i < size; i++) {
             sb.append(separator).append(list.get(i));
         }
         return sb.toString();
     }
-	
-    
-    /**
-     * 得到数组成员的class类型数组
-     * 
-     * @param list
-     * @return
-     */
-    @SafeVarargs
-    public static <T> Class<?>[] arrayOfClassType(T... array) {
-        Class<?>[] clazzs = new Class<?>[array.length];
-        for(int i=0; i<array.length; i++){
-            clazzs[i] = array[i].getClass();
-        }
-        return clazzs;
-    }
+
 }

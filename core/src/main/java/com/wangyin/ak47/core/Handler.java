@@ -13,9 +13,9 @@ package com.wangyin.ak47.core;
  *                  R: Response POJO
  *
  *   +--------+  O=Q                I=Q +--------+
- *   |        | ----------------------> |        |
+ *   |        | ----------------------+ |        |
  *   | Driver |                         |  Stub  |
- *   |        | <---------------------- |        |
+ *   |        | +---------------------- |        |
  *   +--------+  I=R                O=R +--------+
  *
  * 
@@ -105,7 +105,7 @@ public interface Handler<O, I> {
      * 当发现异常时。
      * 
      * @param ctx
-     * @param e
+     * @param cause
      * @throws Exception
      */
     public void doCaught(HandlerContext<O, I> ctx, Throwable cause) throws Exception;

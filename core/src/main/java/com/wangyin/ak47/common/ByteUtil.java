@@ -29,8 +29,8 @@ public class ByteUtil {
      * 
      * 合并多个byte[] list
      * 
-     * @param bs
-     * @return
+     * @param bs                    a collection of byte[]
+     * @return                      merged byte[], or byte[0]. Never return null.
      */
     public static byte[] merge(List<byte[]> bs){
         int len = 0;
@@ -56,8 +56,8 @@ public class ByteUtil {
      * 
      * 合并多个byte[] array
      * 
-     * @param bs
-     * @return
+     * @param bs                    a collection of byte[]
+     * @return                      merged byte[], or byte[0]. Never return null.
      */
     public static byte[] merge(byte[]... bs){
         int len = 0;
@@ -80,9 +80,9 @@ public class ByteUtil {
     /**
      * byte array copy.
      * 
-     * @param src src.
-     * @param length new length.
-     * @return new byte array.
+     * @param src                   source of byte[]
+     * @param length                length of bytes to be copied
+     * @return                      copied byte[]
      */
     public static byte[] copyOf(byte[] src, int length)
     {
@@ -92,10 +92,10 @@ public class ByteUtil {
     /**
      * byte array copy.
      * 
-     * @param src
-     * @param offset
-     * @param length
-     * @return
+     * @param src                   source of byte[]
+     * @param offset                from where to start
+     * @param length                length of bytes to be copied
+     * @return                      copied byte[]
      */
     public static byte[] copyOf(byte[] src, int offset, int length){
         byte[] dest = new byte[length];
@@ -106,11 +106,11 @@ public class ByteUtil {
     /**
      * copy bytes from src to dest
      * 
-     * @param src
-     * @param srcPos
-     * @param dest
-     * @param destPos
-     * @param length
+     * @param src                   source
+     * @param srcPos                source position
+     * @param dest                  destination 
+     * @param destPos               destination position
+     * @param length                length
      */
     public static void copy(byte[] src, int srcPos, byte[] dest, int destPos, int length){
         System.arraycopy(src, srcPos, dest, destPos, length);
@@ -119,9 +119,9 @@ public class ByteUtil {
     /**
      * copy bytes from src to dest
      * 
-     * @param src
-     * @param dest
-     * @param destPos
+     * @param src                   source
+     * @param dest                  destination
+     * @param destPos               destination position
      */
     public static void copy(byte[] src, byte[] dest, int destPos){
         System.arraycopy(src, 0, dest, destPos, src.length);
@@ -132,9 +132,9 @@ public class ByteUtil {
     /**
      * dest[destPos] = src;
      * 
-     * @param src
-     * @param dest
-     * @param destPos
+     * @param src                   source
+     * @param dest                  destination
+     * @param destPos               destination position
      */
     public static void copy(byte src, byte[] dest, int destPos){
         dest[destPos] = src;
@@ -486,50 +486,54 @@ public class ByteUtil {
     /**
      * to String
      * 
-     * @param b
-     * @param off
-     * @param len
-     * @param encoding
-     * @return
-     * @throws UnsupportedEncodingException
+     * @param b byte array
+     * @param off offset
+     * @param len length
+     * @param encoding encoding
+     * @return String
+     * @throws UnsupportedEncodingException encoding wrong
      */
-    public static String bytes2String(byte[] b, int off, int len, String encoding) throws UnsupportedEncodingException{
+    public static String bytes2String(byte[] b, int off, int len, String encoding) 
+            throws UnsupportedEncodingException{
         return new String(b, off, len, encoding);
     }
     
     /**
      * to String with UTF-8 encoding
      * 
-     * @param b
-     * @param off
-     * @param len
-     * @return
-     * @throws UnsupportedEncodingException
+     * @param b byte array
+     * @param off offset
+     * @param len length
+     * @return String
+     * @throws UnsupportedEncodingException encoding wrong
      */
-    public static String bytes2String(byte[] b, int off, int len) throws UnsupportedEncodingException{
+    public static String bytes2String(byte[] b, int off, int len) 
+            throws UnsupportedEncodingException{
         return bytes2String(b, off, len, Ak47Constants.DEFAULT_ENCODING);
     }
     
     /**
      * to String with UTF-8 encoding
      * 
-     * @param b
-     * @return
-     * @throws UnsupportedEncodingException
+     * @param b byte array
+     * @return String
+     * @throws UnsupportedEncodingException encoding wrong
      */
-    public static String bytes2String(byte[] b) throws UnsupportedEncodingException{
+    public static String bytes2String(byte[] b) 
+            throws UnsupportedEncodingException{
         return new String(b, Ak47Constants.DEFAULT_ENCODING);
     }
     
     /**
      * to String with specific encoding
      * 
-     * @param b
-     * @param encoding
-     * @return
-     * @throws UnsupportedEncodingException
+     * @param b byte array
+     * @param encoding encoding
+     * @return String
+     * @throws UnsupportedEncodingException encoding wrong
      */
-    public static String bytes2String(byte[] b, String encoding) throws UnsupportedEncodingException{
+    public static String bytes2String(byte[] b, String encoding) 
+            throws UnsupportedEncodingException{
         return new String(b, encoding);
     }
     
@@ -537,11 +541,12 @@ public class ByteUtil {
     /**
      * from String to byte[] with UTF-8 encoding
      * 
-     * @param str
-     * @return
-     * @throws UnsupportedEncodingException
+     * @param str String
+     * @return bytes
+     * @throws UnsupportedEncodingException encoding wrong
      */
-    public static byte[] string2Bytes(String str) throws UnsupportedEncodingException{
+    public static byte[] string2Bytes(String str) 
+            throws UnsupportedEncodingException{
         return string2Bytes(str, Ak47Constants.DEFAULT_ENCODING);
     }
     
@@ -549,12 +554,13 @@ public class ByteUtil {
     /**
      * from String to byte[] with specific encoding
      * 
-     * @param str
-     * @param encoding
-     * @return
-     * @throws UnsupportedEncodingException
+     * @param str String
+     * @param encoding encoding
+     * @return bytes
+     * @throws UnsupportedEncodingException encoding wrong
      */
-    public static byte[] string2Bytes(String str, String encoding) throws UnsupportedEncodingException{
+    public static byte[] string2Bytes(String str, String encoding) 
+            throws UnsupportedEncodingException{
         return str.getBytes(encoding);
     }
     
@@ -735,10 +741,18 @@ public class ByteUtil {
     }
 
     /**
-     * to base64 string.
+     * 
      * 
      * @param b byte array.
      * @return base64 string.
+     */
+    /**
+     * to base64 string.
+     * 
+     * @param b byte array
+     * @param offset offset
+     * @param length length
+     * @return base64 string
      */
     public static String bytes2base64(byte[] b, int offset, int length)
     {
@@ -757,12 +771,15 @@ public class ByteUtil {
         return bytes2base64(b, 0, b.length, code);
     }
 
+    
     /**
-     * to base64 string.
-     * 
-     * @param b byte array.
-     * @param code base64 code string(0-63 is base64 char,64 is pad char).
-     * @return base64 string.
+     *  to base64 string.
+     *  
+     * @param b byte array
+     * @param offset offset
+     * @param length length
+     * @param code base64 code string(0-63 is base64 char,64 is pad char)
+     * @return base64 string
      */
     public static String bytes2base64(byte[] b, int offset, int length, String code)
     {
@@ -1050,8 +1067,6 @@ public class ByteUtil {
         }
         return b;
     }
-
-
 
 
     private static byte hex(char c)

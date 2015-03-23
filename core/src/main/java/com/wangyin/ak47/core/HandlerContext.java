@@ -48,12 +48,32 @@ public interface HandlerContext<O, I> {
     
     /**
      * 发送数据
-     * @param msg
+     * @param pojo
      * @return 
      */
     public Future<O, I> send(O pojo);
+    
+    /**
+     * 发送数据
+     * @param pojo
+     * @param promise
+     * @return
+     */
     public Future<O, I> send(O pojo, Promise<O, I> promise);
+    
+    /**
+     * 发送数据
+     * @param msg
+     * @return
+     */
     public Future<O, I> send(Message<O> msg);
+    
+    /**
+     * 发送数据
+     * @param msg
+     * @param promise
+     * @return
+     */
     public Future<O, I> send(Message<O> msg, Promise<O, I> promise);
     
     /**

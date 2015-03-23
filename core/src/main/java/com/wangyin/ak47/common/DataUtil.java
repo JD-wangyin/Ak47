@@ -1,9 +1,6 @@
 package com.wangyin.ak47.common;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
-
-
 
 
 /**
@@ -23,15 +20,15 @@ public class DataUtil {
     
 
     /**
-     * Read data to a single string, and cached it in mem.
+     * Read data to a single string, and cached it in memory.
      * 
      * Check the 'lastModified' time of data file whenever call, 
-     * if changed, re-read it from disk, otherwise return the cached copy in mem.
+     * if changed, re-read it from disk, otherwise return the cached copy in memory.
      * 
      * 读取data并缓存到内存中，每次读取检查lastModifed时间，若有修改则重新读取，若无修改则直接返回缓存中的数据。
      * 
-     * @param dataName
-     * @return
+     * @param dataName file name in data directory
+     * @return string of file content
      * @throws IOException
      */
     public static String readStringCached(String dataName) throws IOException {
@@ -41,12 +38,12 @@ public class DataUtil {
     
 
     /**
-     * Compare the create time of copy in mem with the 'lastModified' time of data file.
+     * Compare the create time of copy in memory with the 'lastModified' time of data file.
      * 
      * 对比缓存与文件的修改时间，判断是否发生改变。
      * 
-     * @param dataName
-     * @return
+     * @param dataName file name in data directory
+     * @return whether file changed
      */
     public static boolean isCachedChanged(String dataName) {
         String fileName = Ak47Env.AK47_HOME_DATA_DIR + dataName;
@@ -59,14 +56,12 @@ public class DataUtil {
      * 
      * 将data全部读入为字符串，默认编码UTF-8
      * 
-     * dataName: 
-     *      qinglong.res ===> ak47/data/qinglong.res
-     * 
-     * @param fileName      文件名
-     * @return
+     * @param dataName: 
+     *      qinglong.res  ak47/data/qinglong.res
+     * @return string of file content
      * @throws IOException
      */
-    public static String readString(String dataName) throws IOException {
+    public static String readString(String dataName) throws IOException { 
         return readString(dataName, Ak47Constants.DEFAULT_ENCODING);
     }
     
@@ -76,11 +71,9 @@ public class DataUtil {
      * 
      * 将data全部读入为字符串，需指定编码
      * 
-     * dataName: qinglong.res ==> ak47/data/qinglong.res
-     * 
-     * @param filename      文件路径
-     * @param encoding      必须指定编码
-     * @return
+     * @param dataName file name in data directory
+     * @param encoding encoding
+     * @return string of file content
      * @throws IOException
      */
     public static String readString(String dataName, String encoding) throws IOException{
@@ -95,9 +88,9 @@ public class DataUtil {
      * 将data全部读入为字符串
      * 若文件不存在或内容为空，则返回 数组长度为0，注意不是null。
      * 
-     * @param filename
-     * @return
-     * @throws FileNotFoundException
+     * @param dataName file name in data directory
+     * @return bytes of file content
+     * @throws IOException
      */
     public static byte[] readBytes(String dataName) throws IOException{
         String fileName = Ak47Env.AK47_HOME_DATA_DIR + dataName;
@@ -110,9 +103,9 @@ public class DataUtil {
      * 
      * 写入字符串到data文件，默认编码UTF-8。
      * 
-     * @param dataName
-     * @param append
-     * @param content
+     * @param dataName file name in data directory
+     * @param append whether append or not
+     * @param content string to be write
      * @throws IOException
      */
     public static void writeString(String dataName, boolean append, String content) throws IOException {
@@ -126,9 +119,9 @@ public class DataUtil {
      * 
      * 写入str到data文件，并更新cache，如果有的话。默认编码UTF-8。
      * 
-     * @param dataName
-     * @param append
-     * @param str
+     * @param dataName file name in data directory
+     * @param append whether append or not
+     * @param bytes bytes to be write
      * @throws IOException
      */
     public static void writeBytes(String dataName, boolean append, byte[] bytes) throws IOException {

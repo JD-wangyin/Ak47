@@ -17,11 +17,11 @@ import com.wangyin.ak47.core.util.SessionAttr;
  * The relationship between Message/Request/Response/POJO/Buffer:
  * 
  *    +--------+      decode      +--------+
- *    |        |  ------------->  |        |
+ *    |        |  -------------+  |        |
  *    | Buffer |                  |  POJO  |
- *    |        |  <-------------  |        |
+ *    |        |  +-------------  |        |
  *    +--------+      encode      +--------+
- *        ^                         ^  ^
+ *        +                         +  +
  *        |                         |  |
  *        |            has          |  |
  *    has |  +----------------------+  |
@@ -65,7 +65,7 @@ public interface Message<T> {
     /**
      * Set POJO
      * 
-     * @param t
+     * @param pojo
      */
     public void setPojo(T pojo);
     

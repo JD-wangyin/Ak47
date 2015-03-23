@@ -35,7 +35,7 @@ package com.wangyin.ak47.core;
 public interface Codec<Q, R> {
     
     /**
-     * Converting binary data (here Buffer) into POJO(Q), in Server or {@see Stub}.
+     * Converting binary data (here Buffer) into POJO(Q), in Server or @see Stub.
      * 
      * @param buf
      * @param request
@@ -45,7 +45,7 @@ public interface Codec<Q, R> {
     
     
     /**
-     * Converting POJO(Q) into binary data (here Buffer), in Client or {@see Driver}.
+     * Converting POJO(Q) into binary data (here Buffer), in Client or @see Driver.
      * 
      * @param request
      * @param buf
@@ -55,7 +55,7 @@ public interface Codec<Q, R> {
     
     
     /**
-     * Converting binary data (here Buffer) into POJO(R), in Client or {@see Driver}.
+     * Converting binary data (here Buffer) into POJO(R), in Client or @see Driver.
      * 
      * @param buf
      * @param response
@@ -65,7 +65,7 @@ public interface Codec<Q, R> {
 
     
     /**
-     * Converting POJO(R) into binary data (here Buffer), in Server or {@see Stub}.
+     * Converting POJO(R) into binary data (here Buffer), in Server or @see Stub.
      * 
      * @param response
      * @param buf

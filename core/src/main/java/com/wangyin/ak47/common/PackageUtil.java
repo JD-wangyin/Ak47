@@ -23,7 +23,7 @@ public class PackageUtil {
     /**
      * Simplify a Class or Package full name, such as:
      * 
-     *  com.wangyin.ak47.common.PackageUtil ===> c.w.a.c.PackageUtil
+     *  com.wangyin.ak47.common.PackageUtil  {@code ===>}  c.w.a.c.PackageUtil
      * 
      * 简化一个类或包的路径，为了避免太长。
      * 

@@ -17,10 +17,10 @@ import com.wangyin.ak47.core.Service;
  * 用于实现service，
  * 在HandlerChain中，必须在CodecDriverHandler的后面。
  * 
- * @author wyhanyu
+ * @author hannyu
  *
- * @param <D>
- * @param <U>
+ * @param <O>
+ * @param <I>
  */
 public class ServiceDriverHandler<O, I> extends HandlerAdapter<O, I> { 
     private static final Logger log = new Logger(ServiceDriverHandler.class);

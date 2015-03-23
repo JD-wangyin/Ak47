@@ -19,7 +19,6 @@ public interface Buffer {
     /**
      * Sets the {@code readerIndex} and {@code writerIndex} of this buffer to
      * {@code 0}.
-     * This method is identical to {@link #setIndex(int, int) setIndex(0, 0)}.
      * <p>
      * Please note that the behavior of this method is different
      * from that of NIO buffer, which sets the {@code limit} to
@@ -273,11 +272,7 @@ public interface Buffer {
      * Transfers the specified source buffer's data to this buffer starting at
      * the current {@code writerIndex} until the source buffer becomes
      * unreadable, and increases the {@code writerIndex} by the number of
-     * the transferred bytes.  This method is basically same with
-     * {@link #writeBytes(ByteBuf, int, int)}, except that this method
-     * increases the {@code readerIndex} of the source buffer by the number of
-     * the transferred bytes while {@link #writeBytes(ByteBuf, int, int)}
-     * does not.
+     * the transferred bytes.
      *
      * @throws IndexOutOfBoundsException
      *         if {@code src.readableBytes} is greater than
@@ -335,8 +330,7 @@ public interface Buffer {
     
     /**
      * Returns {@code true} if and only if this buffer has a backing byte array.
-     * If this method returns true, you can safely call {@link #array()} and
-     * {@link #arrayOffset()}.
+     * If this method returns true, you can safely call {@link #array()}.
      */
     public boolean hasArray();
 
