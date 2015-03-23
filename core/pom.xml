@@ -5,12 +5,17 @@
   <parent>
     <groupId>com.wangyin</groupId>
     <artifactId>ak47-parent</artifactId>
-    <version>0.1.1-SNAPSHOT</version>
+    <version>0.1.1</version>
   </parent>
   
   <artifactId>ak47-core</artifactId>
   <name>ak47-core</name>
   <packaging>jar</packaging>
+  
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+  </properties>
 
   <dependencies>
     <dependency>
@@ -103,6 +108,7 @@
           <version>false</version>
           <author>false</author>
           <keywords>true</keywords>
+          <failOnError>false</failOnError>
         </configuration>
         <executions>
           <execution>
