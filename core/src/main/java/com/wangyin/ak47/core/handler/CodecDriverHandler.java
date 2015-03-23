@@ -35,10 +35,10 @@ public class CodecDriverHandler<O, I> extends HandlerAdapter<O, I> {
         if( response.hasPojo() ){
             ctx.fireReceived(msg);
         }else{
-            log.warn("Interrupted for decodeResponse fail. ");
+            log.warn("Inbound interrupted because of decodeResponse fail.");
         }
         
-    }
+    } 
     
     @Override
     public void doSend(HandlerContext<O, I> ctx, Message<O> msg, 
@@ -50,7 +50,7 @@ public class CodecDriverHandler<O, I> extends HandlerAdapter<O, I> {
         if( msg.getBuffer().isReadable() ){
             ctx.send(msg, promise);
         }else{
-            log.warn("Interrupted for encodeRequest fail.");
+            log.warn("Outbound interrupted because of encodeRequest fail.");
         }
         
     }

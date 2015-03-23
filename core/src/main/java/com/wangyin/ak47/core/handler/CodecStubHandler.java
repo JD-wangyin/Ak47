@@ -28,7 +28,7 @@ public class CodecStubHandler<O, I> extends HandlerAdapter<O, I> {
         if( request.hasPojo() ){
             ctx.fireReceived(msg);
         }else{
-            log.warn("Interrupted for decodeRequest fail. ");
+            log.warn("Inbound interrupted because of decodeRequest fail.");
         }
         
     }
@@ -43,7 +43,7 @@ public class CodecStubHandler<O, I> extends HandlerAdapter<O, I> {
         if( msg.getBuffer().isReadable() ){
             ctx.send(msg, promise);
         }else{
-            log.warn("Interrupted for encodeResponse fail.");
+            log.warn("Outbound interrupted because of encodeResponse fail.");
         }
         
     }

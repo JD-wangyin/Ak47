@@ -159,8 +159,8 @@ public class Ak47Boot {
     /**
      * runable entry
      * 
-     * @param args
-     * @throws IOException 
+     * @param args              command arguments
+     * @throws IOException      when NOT in ak47 project
      */
     public static void main(String[] args) throws IOException {
 

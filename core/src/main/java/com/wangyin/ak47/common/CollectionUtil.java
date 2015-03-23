@@ -77,6 +77,7 @@ public class CollectionUtil {
      * @param array
      * @return
      */
+    @SafeVarargs
     public static <T> String array2String(T... array){
         int len = array.length;
         if( len == 0 ){
@@ -115,6 +116,7 @@ public class CollectionUtil {
 	 * @param array
 	 * @return
 	 */
+    @SafeVarargs
     public static <T> List<T> array2List(T... array) {
 	    return Arrays.asList(array);
 	}
