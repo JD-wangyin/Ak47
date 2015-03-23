@@ -3,7 +3,7 @@
   
   <groupId>com.wangyin</groupId>
   <artifactId>ak47-parent</artifactId>
-  <version>0.1.1-SNAPSHOT</version>
+  <version>0.1.1</version>
   <packaging>pom</packaging>
   
   <name>ak47-parent</name>
@@ -23,14 +23,11 @@
     </license>
   </licenses>
   
-  <developers>
-    <developer>
-      <name>Yu Han</name>
-      <email>hannyu@gmail.com</email>
-      <organization>JD-wangyin</organization>
-      <organizationUrl>https://github.com/JD-wangyin</organizationUrl>
-    </developer>
-  </developers>
+  <organization>
+    <name>JD-wangyin</name>
+    <url>https://github.com/JD-wangyin</url>
+  </organization>
+
 
   <scm>
     <connection>scm:git:git://github.com/JD-wangyin/Ak47.git</connection>
@@ -66,8 +63,17 @@
   
   <build>
     <plugins>
-	  
-	  <!-- gpg -->
+      <!-- jdk 1.7 -->
+      <plugin>  
+        <groupId>org.apache.maven.plugins</groupId>  
+        <artifactId>maven-compiler-plugin</artifactId>  
+        <configuration>  
+          <source>1.7</source>  
+          <target>1.7</target>  
+        </configuration>  
+      </plugin>
+
+      <!-- gpg -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-gpg-plugin</artifactId>
