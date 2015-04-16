@@ -29,7 +29,7 @@ import com.wangyin.ak47.pipes.dubbo.DubboHeader;
  * 
  * Dubbo-protocol + Hessian2.0-serialize
  * 
- * @author wyhubingyin
+ * @author hubingyin
  * 
  */
 public final class DubboHessianPipe extends AbstractDubboPipe<DubboHessianRequest, DubboHessianResponse> {
@@ -127,7 +127,7 @@ public final class DubboHessianPipe extends AbstractDubboPipe<DubboHessianReques
         String method = dubboreq.getMethod();
         h2out.writeString(method);
         
-        Class<?>[] argtypes = CollectionUtil.arrayOfClassType( CollectionUtil.list2Array(dubboreq.getArgs()));
+        Class<?>[] argtypes = CollectionUtil.objects2Classes( dubboreq.getArgs() );
         String argsdesc = ReflectUtils.getDesc(argtypes);
         h2out.writeString(argsdesc);
         
