@@ -53,12 +53,12 @@
   </properties>
   
   <modules>
-    <module>ak47-core</module>
-    <module>ak47-example</module>
-    <module>ak47-autotest</module>
-    <module>ak47-mocklet</module>
-    <module>ak47-pipe-http</module>
-    <module>ak47-pipe-dubbo</module>
+    <module>core</module>
+    <module>example</module>
+    <module>autotest</module>
+    <module>mocklet</module>
+    <module>pipe-http</module>
+    <module>pipe-dubbo</module>
   </modules>
   
   <build>
