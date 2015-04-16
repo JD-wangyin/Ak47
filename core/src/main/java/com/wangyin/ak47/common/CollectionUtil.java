@@ -8,7 +8,7 @@ import java.util.List;
  * 
  * 提供集合、数组的相关操作
  * 
- * @author wyhubingyin
+ * @author hubingyin
  * 
  */
 public class CollectionUtil {
@@ -167,4 +167,37 @@ public class CollectionUtil {
         return sb.toString();
     }
 
+    
+    /**
+     * 得到数组成员的class类型数组
+     * 
+     * @param objects array of Object
+     * @return array of Object's Class Type
+     */
+    @SafeVarargs
+    public static <T> Class<?>[] objects2Classes(T... objects) { 
+        Class<?>[] clazzs = new Class<?>[objects.length];
+        for(int i=0; i<objects.length; i++){
+            clazzs[i] = objects[i].getClass();
+        }
+        return clazzs;
+    }
+    
+    /**
+     * 得到数组成员的class类型数组
+     * 
+     * @param objects list of Object
+     * @return array of Object's Class Type
+     */
+    public static <T> Class<?>[] objects2Classes(List<Object> objects) { 
+        int size = objects.size();
+        Class<?>[] clazzs = new Class<?>[size];
+        for(int i=0; i<size; i++){
+            clazzs[i] = objects.get(i).getClass();
+        }
+        return clazzs;
+    }
+    
+    
+    
 }
