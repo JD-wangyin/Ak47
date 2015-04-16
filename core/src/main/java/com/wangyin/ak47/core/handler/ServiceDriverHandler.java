@@ -43,7 +43,7 @@ public class ServiceDriverHandler<O, I> extends HandlerAdapter<O, I> {
     public void doReceived(HandlerContext<O, I> ctx, Message<I> msg) throws Exception {
         
         if( serviceChain.size() == 0 ){
-            log.warn("Ignored because there is NO service.");
+            log.debug("Ignored because there is NO service.");
         }else{
             SimpleResponse<I> response = new SimpleResponse<I>(msg);
             Message<O> reqmsg = msg.newMessage();
