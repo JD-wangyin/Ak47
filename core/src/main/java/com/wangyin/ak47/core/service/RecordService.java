@@ -11,10 +11,10 @@ import com.wangyin.ak47.core.record.RecordPool;
  * 负责记录输入和输出的数据。
  * 目前只支持YAML文件。
  * 
- * @author wyhanyu
+ * @author hannyu
  *
- * @param <Q>
- * @param <R>
+ * @param <Q> Request
+ * @param <R> Response
  */
 public class RecordService<Q, R> implements Service<Q, R> {
     private static final Logger log = new Logger(RecordService.class);
