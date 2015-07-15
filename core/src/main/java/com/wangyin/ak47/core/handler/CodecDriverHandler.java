@@ -35,7 +35,7 @@ public class CodecDriverHandler<O, I> extends HandlerAdapter<O, I> {
         if( response.hasPojo() ){
             ctx.fireReceived(msg);
         }else{
-            log.warn("Inbound interrupted because of decodeResponse fail.");
+            log.debug("Inbound interrupted because of decodeResponse fail.");
         }
         
     } 

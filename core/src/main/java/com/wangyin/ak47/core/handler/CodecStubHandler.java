@@ -28,7 +28,7 @@ public class CodecStubHandler<O, I> extends HandlerAdapter<O, I> {
         if( request.hasPojo() ){
             ctx.fireReceived(msg);
         }else{
-            log.warn("Inbound interrupted because of decodeRequest fail.");
+            log.debug("Inbound interrupted because of decodeRequest fail.");
         }
         
     }
