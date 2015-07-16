@@ -1,7 +1,5 @@
 package com.wangyin.ak47.pipes.http;
 
-
-
 import com.wangyin.ak47.common.Logger;
 import com.wangyin.ak47.core.Pipe;
 import com.wangyin.ak47.core.Request;
