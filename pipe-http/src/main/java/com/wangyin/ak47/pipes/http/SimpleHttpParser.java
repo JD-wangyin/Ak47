@@ -10,6 +10,8 @@ import com.wangyin.ak47.core.Buffer;
 
 /**
  * 简单的Http协议解析器
+ * 无依赖第三方解析库
+ * 支持 chunked
  * 
  * @author wyhubingyin
  *
@@ -33,10 +35,12 @@ public class SimpleHttpParser {
     private static final int MAX_HEADERS_BLOCK_SIZE_LIMIT = 8 * 1024; 
     
     
+
     /**
-     * 解析为一个request
-     * @param bytes
-     * @return
+     * Buffer →→→ HttpRequest
+     * 
+     * @param buf       Buffer
+     * @return          HttpRequest
      */
     public static SimpleHttpRequest parseRequest(Buffer buf){
         SimpleHttpMessage shm = parseMessage(buf);
@@ -48,9 +52,10 @@ public class SimpleHttpParser {
     
     
     /**
-     * 解析为一个response
-     * @param bytes
-     * @return
+     * Buffer →→→ HttpResponse
+     * 
+     * @param buf       Buffer
+     * @return          HttpResponse
      */
     public static SimpleHttpResponse parseResponse(Buffer buf){
         SimpleHttpMessage shm = parseMessage(buf);
@@ -62,9 +67,10 @@ public class SimpleHttpParser {
     
     
     /**
-     * 解析一个httpmessage
-     * @param bytes
-     * @return
+     * Buffer →→→ HttpMessage
+     * 
+     * @param buf       Buffer
+     * @return          HttpMessage
      */
     public static SimpleHttpMessage parseMessage(Buffer buf){
         
