@@ -1,6 +1,7 @@
 package com.wangyin.ak47.example;
 
 
+import com.wangyin.ak47.common.Logger;
 import com.wangyin.ak47.core.Request;
 import com.wangyin.ak47.core.Response;
 import com.wangyin.ak47.core.Service;
@@ -11,6 +12,8 @@ import com.wangyin.ak47.pipes.http.SimpleHttpResponse;
 
 
 public class SimpleHttpStubExample {
+    
+    private static final Logger log = new Logger(SimpleHttpStubExample.class);
 
     public static void main(String[] args) throws Exception {
         
@@ -29,6 +32,8 @@ public class SimpleHttpStubExample {
                 
                 SimpleHttpResponse httpres = new SimpleHttpResponse();
                 String content = "Hello Ak47! Your request url is "+httpreq.getUrl();
+                log.info("content: {}", content);
+                
                 httpres.setContent(content.getBytes());
                 response.pojo(httpres);
             }
