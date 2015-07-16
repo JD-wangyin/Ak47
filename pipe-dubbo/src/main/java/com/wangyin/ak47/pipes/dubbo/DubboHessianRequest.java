@@ -1,15 +1,18 @@
 package com.wangyin.ak47.pipes.dubbo;
 
 import java.util.LinkedHashMap;
+
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
 import com.wangyin.ak47.pipes.dubbo.DubboHeader;
+
+
 /**
  * 
  * @author wyhubingyin
- * @date 2014年3月18日
+ * 
  */
 public class DubboHessianRequest {
 

@@ -6,7 +6,6 @@ import com.wangyin.ak47.pipes.dubbo.DubboHeader;
 /**
  * 
  * @author wyhubingyin
- * @date 2014年3月18日
  */
 public class DubboHessianResponse {
 	private DubboHeader dubboHeader;
