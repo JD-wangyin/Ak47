@@ -5,7 +5,7 @@
   <parent>
     <groupId>com.wangyin</groupId>
     <artifactId>ak47-parent</artifactId>
-    <version>0.1.1</version>
+    <version>0.1.2</version>
   </parent>
   
   <artifactId>ak47-pipe-dubbo</artifactId>
