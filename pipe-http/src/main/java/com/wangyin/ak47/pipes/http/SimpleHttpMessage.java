@@ -50,8 +50,8 @@ public class SimpleHttpMessage {
     /**
      * 添加一个Header
      * 
-     * @param key
-     * @param value
+     * @param key       Key in header
+     * @param value     Value of the key
      */
     public void addHeader(String key, String value){
 //        key = StringUtil2.asciiToLowerCase(key);
@@ -69,8 +69,8 @@ public class SimpleHttpMessage {
      * 获取该key的第一个header
      * 若不存在，则返回null
      * 
-     * @param key
-     * @return 
+     * @param key       Key in header
+     * @return          Value of the key
      */
     public String getHeaderFirst(String key){
 //        key = StringUtil2.asciiToLowerCase(key);
@@ -84,8 +84,9 @@ public class SimpleHttpMessage {
     
     /**
      * 修改key的header
-     * @param key
-     * @param value
+     * 
+     * @param key       Key in header
+     * @param value     Value of the Key
      */
     public void setOrAddFirstHeader(String key, String value){
 //        key = StringUtil2.asciiToLowerCase(key);
@@ -100,7 +101,7 @@ public class SimpleHttpMessage {
     /**
      * build HTTP header
      * 
-     * @return
+     * @return      Text of header
      */
     public String buildHeaderString(){
         StringBuilder sb = new StringBuilder();
@@ -126,7 +127,7 @@ public class SimpleHttpMessage {
     /**
      * 完整打印
      * 
-     * @return
+     * @return      Text of header, and size of body
      */
     @Override
     public String toString(){
@@ -143,7 +144,8 @@ public class SimpleHttpMessage {
     
     /**
      * 导出为bytearray
-     * @return
+     * 
+     * @return      Bytes of all header and body
      */
     public byte[] buildFullBytes(){
         byte[] half = buildHeaderString().getBytes();
