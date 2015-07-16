@@ -6,12 +6,14 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class Ak47ThreadFactory implements ThreadFactory {
     
+    private static final String THREAD_NAME_PREFIX_PREFIX = "ak47-thread-";
+    
     private static final AtomicInteger POOL_NUM = new AtomicInteger(1);
     private AtomicInteger threadNum = new AtomicInteger(1);
     private String prefix;
     
     public Ak47ThreadFactory(){
-        prefix = "ak47-thread-" + POOL_NUM.getAndIncrement() + "-";
+        prefix = THREAD_NAME_PREFIX_PREFIX + POOL_NUM.getAndIncrement() + "-";
     }
     
     @Override
