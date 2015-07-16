@@ -63,14 +63,16 @@ public abstract class AbstractDubboPipe<Q, R> extends Pipe<Q, R> {
         request.requestAttr().set(KEY_CURRENT_REQUEST_ID, dd.getDubboHeader().getRequestId());
     }
     
+    
     /**
-     * DubboData 包含了 dubbo header 以及 body
+     * DubboData →→→ POJO
      * 
-     * @param dd
-     * @param pojos
-     * @throws Exception 
+     * @param dd                DubboData
+     * @param request           Request with POJO
+     * @throws Exception        in any case
      */
-    public abstract void decodeDubboRequest(DubboData dd, Request<Q> request) throws Exception;
+    public abstract void decodeDubboRequest(DubboData dd, Request<Q> request) 
+            throws Exception;
     
     
     @Override
@@ -89,18 +91,19 @@ public abstract class AbstractDubboPipe<Q, R> extends Pipe<Q, R> {
         dh.setBodyLength(dd.getBody().length);
         
         encodeDubboData(dd, buf);
-        
     }
     
     
+
     /**
-     * 将 Q 转化为 DubboData
+     * POJO →→→ DubboData
      * 
-     * @param pojos
-     * @param dd
-     * @throws Exception 
+     * @param request           Request with POJO
+     * @param dd                DubboData
+     * @throws Exception        in any case
      */
-    public abstract void encodeDubboRequest(Request<Q> request, DubboData dd) throws Exception;
+    public abstract void encodeDubboRequest(Request<Q> request, DubboData dd) 
+            throws Exception;
     
     @Override
     public void decodeResponse(Buffer buf, Response<R> response) throws Exception {
@@ -115,13 +118,14 @@ public abstract class AbstractDubboPipe<Q, R> extends Pipe<Q, R> {
     
     
     /**
-     * DubboData 包含了 dubbo header 以及 body
+     * DubboData →→→ POJO
      * 
-     * @param dd
-     * @param pojos
-     * @throws Exception 
+     * @param dd                DubboData
+     * @param response          Response with POJO
+     * @throws Exception        in any case
      */
-    public abstract void decodeDubboResponse(DubboData dd, Response<R> response) throws Exception;
+    public abstract void decodeDubboResponse(DubboData dd, Response<R> response) 
+            throws Exception;
     
     
     @Override
@@ -149,20 +153,23 @@ public abstract class AbstractDubboPipe<Q, R> extends Pipe<Q, R> {
     }
     
     /**
-     * 将 Q 转化为 DubboData
+     * POJO →→→ DubboData
      * 
-     * @param pojos
-     * @param dd
-     * @throws Exception 
+     * @param response          Response with POJO
+     * @param dd                DubboData
+     * @throws Exception        in any case
      */
-    public abstract void encodeDubboResponse(Response<R> response, DubboData dd) throws Exception;
+    public abstract void encodeDubboResponse(Response<R> response, DubboData dd) 
+            throws Exception;
     
     
+
     /**
-     * 解析 Dubbo 协议头
+     * Buffer →→→ DubboData
      * 
-     * @param in
-     * @return 
+     * @param buf       Buffer
+     * @param dd        DubboData
+     * @return          if decode success
      */
     private boolean decodeDubboData(Buffer buf, DubboData dd){
         int readableBytes = buf.readableBytes();
@@ -214,11 +221,13 @@ public abstract class AbstractDubboPipe<Q, R> extends Pipe<Q, R> {
         return true;
     }
     
+    
     /**
-     * 将DubboData转化为bytes写入out中
+     * DubboData →→→ Buffer
      * 
-     * @param out
-     * @param dd
+     * @param dd        DubboData
+     * @param buf       Buffer
+     * @return          if decode success
      */
     private boolean encodeDubboData(DubboData dd, Buffer buf){
         
@@ -247,12 +256,12 @@ public abstract class AbstractDubboPipe<Q, R> extends Pipe<Q, R> {
         return true;
     }
     
-
+    
     /**
-     * 读取一个dubbo数据包
+     * Read buf of one request
      * 
-     * @param buf
-     * @return
+     * @param buf           Buffer of all
+     * @return              Buffer of one request
      */
     private Buffer readOne(Buffer buf){
         int readerIndex = buf.readerIndex();
@@ -297,7 +306,7 @@ public abstract class AbstractDubboPipe<Q, R> extends Pipe<Q, R> {
     
     @Override
     public Executor newExecutor(){
-        return new SingleThreadEventExecutor(1, 200);
+        return new SingleThreadEventExecutor();
     }
     
 
