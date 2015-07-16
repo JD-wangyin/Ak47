@@ -3,7 +3,7 @@
   
   <groupId>com.wangyin</groupId>
   <artifactId>ak47-parent</artifactId>
-  <version>0.1.1</version>
+  <version>0.1.2</version>
   <packaging>pom</packaging>
   
   <name>ak47-parent</name>
