@@ -16,59 +16,100 @@ import com.wangyin.ak47.common.Logger;
  * 
  * 
  * 
- * @author wyhanyu
+ * @author hannyu
  *
  */
 public class SimpleHttpRequest extends SimpleHttpMessage {
     private static final Logger log = new Logger(SimpleHttpRequest.class);
     
     private String method = "GET";
-    // 默认1.0是为了避免 chunked编码
-    private String httpVersion = "HTTP/1.0";
+    // 默认1.0是为了避免 chunked编码，但现在已支持chunked，所以可以直接1.1了
+    private String httpVersion = "HTTP/1.1";
     private String url = "/";
     
     
+    /**
+     * A Simple Http Request with default params.
+     */
     public SimpleHttpRequest(){
         this(null,null,null);
         addHeader("User-Agent", Ak47Constants.NAME+"/"+Ak47Constants.VERSION+
                 " ("+SimpleHttpRequest.class.getName()+")");
     }
+    
+    /**
+     * A Simple Http Request with given method and url.
+     * 
+     * @param method        Method in Request-Line
+     * @param url           Url in Request-Line
+     */
     public SimpleHttpRequest(String method, String url){
         this(method, url, null);
     }
+    
+    /**
+     * A Simple Http Request with given method, url and version.
+     * 
+     * @param method        Method in Request-Line
+     * @param url           Url in Request-Line
+     * @param httpVersion   Version in Request-Line
+     */
     public SimpleHttpRequest(String method, String url, String httpVersion){
         setRequestLine(method, url, httpVersion);
     }
     
-    
+    /**
+     * 
+     * @return          Method in Request-Line
+     */
     public String getMethod() {
         return method;
     }
+    /**
+     * 
+     * @param method    Method in Request-Line
+     */
     public void setMethod(String method) {
         this.method = method;
         updateStartLine();
     }
+    /**
+     * 
+     * @return          HttpVersion in Request-Line
+     */
     public String getHttpVersion() {
         return httpVersion;
     }
+    /**
+     * 
+     * @param httpVersion   HttpVersion in Request-Line
+     */
     public void setHttpVersion(String httpVersion) {
         this.httpVersion = httpVersion;
         updateStartLine();
     }
+    /**
+     * 
+     * @return          Url in Request-Line
+     */
     public String getUrl() {
         return url;
     }
+    /**
+     * 
+     * @param url       Url in Request-Line
+     */
     public void setUrl(String url) {
         this.url = url;
         updateStartLine();
     }
     
     /**
-     * 设置 第一行
+     * set Request-Line
      * 
-     * @param method
-     * @param url
-     * @param httpVersion
+     * @param method        Method in Request-Line
+     * @param url           Url in Request-Line
+     * @param httpVersion   Version in Request-Line
      */
     public void setRequestLine(String method, String url, String httpVersion){
         this.method = method==null?this.method:method;
@@ -84,8 +125,8 @@ public class SimpleHttpRequest extends SimpleHttpMessage {
     /**
      * 转化，如果格式不对则返回null
      * 
-     * @param shm
-     * @return
+     * @param shm       SimpleHttpMessage
+     * @return          HttpRequest or null if Request-Line malformed 
      */
     public static SimpleHttpRequest valueOf(SimpleHttpMessage shm){
       String startLine = shm.getStartLine();
@@ -104,6 +145,11 @@ public class SimpleHttpRequest extends SimpleHttpMessage {
       return shr;
     }
 
+    /**
+     * Deep copy with Request-Line, headers and body.
+     * 
+     * @param request       HttpRequest
+     */
     public void copyOf(SimpleHttpRequest request){
         this.setRequestLine(request.getMethod(), request.getUrl(), 
                 request.getHttpVersion());
