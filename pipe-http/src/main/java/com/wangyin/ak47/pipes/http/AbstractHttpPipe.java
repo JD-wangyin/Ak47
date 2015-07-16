@@ -1,11 +1,13 @@
 package com.wangyin.ak47.pipes.http;
 
 
+
 import com.wangyin.ak47.common.Logger;
 import com.wangyin.ak47.core.Pipe;
 import com.wangyin.ak47.core.Request;
 import com.wangyin.ak47.core.Response;
 import com.wangyin.ak47.core.Buffer;
+
 
 /**
  * 抽象HttpPipe基类，
@@ -14,10 +16,9 @@ import com.wangyin.ak47.core.Buffer;
  * 现用自制SimpleHttpParser，不支持pipeline方式。
  * 
  * @author wyhubingyin
- * @date 2014年2月10日
  * 
- * @param <Q>
- * @param <R>
+ * @param <Q>       Request POJO
+ * @param <R>       Response POJO
  */
 public abstract class AbstractHttpPipe<Q, R> extends Pipe<Q, R>{
     private static final Logger log = new Logger(AbstractHttpPipe.class);
@@ -34,14 +35,16 @@ public abstract class AbstractHttpPipe<Q, R> extends Pipe<Q, R>{
         
     }
     
+
     /**
-     * 这里可将HttpRequest转化为任何对象。
+     * HttpRequest →→→ POJO
      * 
-     * @param request   HttpRequest有完整的操作http协议的API
-     * @param pojos     任何对象
-     * @throws Exception 
+     * @param httpreq       HTTP Request object that offer simple API
+     * @param request       Request with POJO
+     * @throws Exception    in any case
      */
-    public abstract void decodeHttpRequest(SimpleHttpRequest httpreq, Request<Q> request) throws Exception;
+    public abstract void decodeHttpRequest(SimpleHttpRequest httpreq, 
+            Request<Q> request) throws Exception;
 
     
     @Override
@@ -50,9 +53,11 @@ public abstract class AbstractHttpPipe<Q, R> extends Pipe<Q, R>{
         SimpleHttpRequest httpreq = new SimpleHttpRequest();
         encodeHttpRequest(request, httpreq);
         
-        if( httpreq.getContent() != null && httpreq.getHeaderFirst("Content-Length") == null ){
+        if( httpreq.getContent() != null && 
+                httpreq.getHeaderFirst("content-length") == null ){
             int contentLength = httpreq.getContent().length;
-            httpreq.setOrAddFirstHeader("Content-Length", String.valueOf(contentLength));
+            httpreq.setOrAddFirstHeader("content-length", 
+                    String.valueOf(contentLength));
         }
         
         buf.writeBytes(httpreq.buildFullBytes());
@@ -60,12 +65,14 @@ public abstract class AbstractHttpPipe<Q, R> extends Pipe<Q, R>{
     
 
     /**
-     * 这里需要将将任何对象转化为response
+     * POJO →→→ HttpRequest
      * 
-     * @param pojos     任何对象
-     * @param response  SimpleHttpResponse
+     * @param request       Request with POJO
+     * @param httpreq       HTTP Request object that offer simple API
+     * @throws Exception    in any case
      */
-    public abstract void encodeHttpRequest(Request<Q> request, SimpleHttpRequest httpreq) throws Exception;
+    public abstract void encodeHttpRequest(Request<Q> request, 
+            SimpleHttpRequest httpreq) throws Exception;
 
     @Override
     public void decodeResponse(Buffer buf, Response<R> response) throws Exception {
@@ -105,20 +112,46 @@ public abstract class AbstractHttpPipe<Q, R> extends Pipe<Q, R>{
 //        } 
     }
     
-    public abstract void decodeHttpResponse(SimpleHttpResponse httpres, Response<R> response) throws Exception;
+    
+    /**
+     * HttpResponse →→→ POJO
+     * 
+     * @param httpres       HTTP Response object that offer simple API
+     * @param response      Response with POJO
+     * @throws Exception    In any case
+     */
+    public abstract void decodeHttpResponse(SimpleHttpResponse httpres, 
+            Response<R> response) throws Exception;
 
     @Override
     public void encodeResponse(Response<R> response, Buffer buf) throws Exception {
         SimpleHttpResponse httpRes = new SimpleHttpResponse();
         encodeHttpResponse(response, httpRes);
         
-        if( httpRes.getContent() != null && httpRes.getHeaderFirst("Content-Length") == null ){
+        if( httpRes.getContent() != null && 
+                httpRes.getHeaderFirst("content-length") == null ){
             int contentLength = httpRes.getContent().length;
-            httpRes.setOrAddFirstHeader("Content-Length", String.valueOf(contentLength));
+            httpRes.setOrAddFirstHeader("content-length", 
+                    String.valueOf(contentLength));
         }
+        
+        if( httpRes.getHeaderFirst("connection") == null ){
+            httpRes.setOrAddFirstHeader("connection", "keep-alive");
+        }
+        
 
         buf.writeBytes(httpRes.buildFullBytes());
     }
 
-    public abstract void encodeHttpResponse(Response<R> response, SimpleHttpResponse httpres) throws Exception;
+    /**
+     * POJO →→→ HttpRequest
+     * 
+     * @param response      Response with POJO
+     * @param httpres       HTTP Response object that offer simple API
+     * @throws Exception    In any case
+     */
+    public abstract void encodeHttpResponse(Response<R> response, 
+            SimpleHttpResponse httpres) throws Exception;
+    
+    
 }
