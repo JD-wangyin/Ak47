@@ -7,10 +7,7 @@ import com.wangyin.ak47.core.Response;
  * 简单实现
  * 
  * @author wyhubingyin
- * @date 2014年2月10日
  * 
- * @param <Q>
- * @param <R>
  */
 public final class SimpleHttpPipe extends AbstractHttpPipe<SimpleHttpRequest, 
         SimpleHttpResponse>{
