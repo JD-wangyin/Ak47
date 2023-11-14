@@ -21,7 +21,7 @@
     <dependency>
       <groupId>io.netty</groupId>
       <artifactId>netty-all</artifactId>
-      <version>4.0.29.Final</version>
+      <version>4.1.44.Final</version>
       <!-- <version>5.0.0.Alpha1</version> -->
       <!-- <version>4.0.10.Final</version> -->
     </dependency>
@@ -43,7 +43,7 @@
       <dependency>
         <groupId>org.yaml</groupId>
         <artifactId>snakeyaml</artifactId>
-        <version>1.12</version>
+        <version>1.31</version>
       </dependency>
       
       
